@@ -7,6 +7,7 @@ import { HttpModule } from '@angular/http';
 
 import { MyApp } from './app.component';
 
+import { LoginPage } from '../pages/login/login';
 import { NewRedpackPage } from '../pages/new-redpack/new-redpack';
 import { RedpackListPage } from '../pages/redpack-list/redpack-list';
 import { SettingPage } from '../pages/setting/setting';
@@ -14,6 +15,12 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Utils } from '../provider/Utils';
+import { Tools } from '../provider/Tools';
+import { Users } from '../provider/Users';
+import { ApiService } from '../provider/api-service';
+// import { APIs } from '../provider/APIs';
+// import { ApiService } from '../provider/api-service';
 
 @NgModule({
   declarations: [
@@ -21,7 +28,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     NewRedpackPage,
     RedpackListPage,
     SettingPage,
-    TabsPage
+    TabsPage,
+    LoginPage,
   ],
   imports: [
     BrowserModule,
@@ -38,12 +46,20 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     NewRedpackPage,
     RedpackListPage,
     SettingPage,
-    TabsPage
+    TabsPage,
+    LoginPage,
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    Utils,
+    // APIs,
+    Tools,
+    // ApiService,
+    Users,
+    ApiService,
+    
   ]
 })
 export class AppModule {}
