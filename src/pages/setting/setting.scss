@@ -1,3 +1,49 @@
 page-setting {
+    .user-caption {
+        background: white;
+        // margin-bottom: 30px;
+    }
 
+    .list-ios > .item-block:first-child {
+        border-top: 0;
+    }
+
+    .list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block {
+        border-bottom: 0;
+    }
+
+    .list-ios {
+        margin-bottom: 10px;
+    }
+
+    .cell-box {
+        padding: 15px;
+        text-align: center;
+        h3, p {
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    .wallet {
+        font-size: 18px;
+        color: color($colors, primary);
+    }
+
+    .trade {
+        font-size: 18px;
+        color: #F6A623;
+
+    }
+
+    .faq {
+        font-size: 18px !important;
+        color: #4990E2;
+    }
+
+    .about {
+        font-size: 18px;
+        color: rgb(120,120,120);
+    }
+    
 }
