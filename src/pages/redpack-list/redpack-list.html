@@ -7,7 +7,15 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>RedpackList</ion-title>
+    <!-- <ion-title>RedpackList</ion-title> -->
+    <ion-segment [(ngModel)]="redpack_type">
+      <ion-segment-button value="take">
+        抢到的红包
+      </ion-segment-button>
+      <ion-segment-button value="sent">
+        发出的红包
+      </ion-segment-button>
+    </ion-segment>
   </ion-navbar>
 
 </ion-header>

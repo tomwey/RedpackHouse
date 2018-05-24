@@ -14,7 +14,8 @@ import { /*IonicPage, */NavController, NavParams } from 'ionic-angular';
   templateUrl: 'redpack-list.html',
 })
 export class RedpackListPage {
-
+  redpack_type = 'take';
+  
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
