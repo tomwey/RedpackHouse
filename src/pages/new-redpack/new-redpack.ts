@@ -15,11 +15,43 @@ import { /*IonicPage, */NavController, NavParams } from 'ionic-angular';
 })
 export class NewRedpackPage {
 
+  use_type: number = 0;
+  can_commit: boolean = false;
+
+  redpack: any = {
+    money: '',
+    quantity: '',
+    subject: '',
+    theme: '',
+    audio: '',
+    use_type: 0,
+  };
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad NewRedpackPage');
+    // console.log('ionViewDidLoad NewRedpackPage');
+  }
+
+  toggleUseType() {
+    if (this.use_type == 0) {
+      this.use_type = 1;
+    } else {
+      this.use_type = 0;
+    }
+  }
+
+  calcTotalMoney() {
+    this.can_commit = this.redpack.money && this.redpack.quantity;
+    
+    let money = this.redpack.money || 0.00;
+    let quantity = this.redpack.quantity || 0;
+    if (this.use_type == 0) {
+      return parseFloat(money);
+    } else {
+      return parseFloat(money) * quantity;
+    }
   }
 
 }
