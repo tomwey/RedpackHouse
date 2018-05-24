@@ -4,6 +4,14 @@ page-setting {
         // margin-bottom: 30px;
     }
 
+    ion-note {
+        font-size: 14px;
+    }
+
+    .item-block {
+        font-size: 14px;
+    }
+
     .list-ios > .item-block:first-child {
         border-top: 0;
     }
@@ -23,26 +31,31 @@ page-setting {
             margin: 0;
             padding: 0;
         }
+
+        p {
+            font-size: 14px;
+            color: #999;
+        }
     }
 
     .wallet {
-        font-size: 18px;
+        // font-size: 18px;
         color: color($colors, primary);
     }
 
     .trade {
-        font-size: 18px;
+        // font-size: 18px;
         color: #F6A623;
 
     }
 
     .faq {
-        font-size: 18px !important;
+        // font-size: 18px !important;
         color: #4990E2;
     }
 
     .about {
-        font-size: 18px;
+        // font-size: 18px;
         color: rgb(120,120,120);
     }
     
