@@ -1,0 +1,72 @@
+$font-path: '../assets/fonts';
+
+@font-face {
+  font-weight: normal;
+  font-style: normal;
+  font-family: 'iconfont';
+  src:  url('#{$font-path}/iconfont.eot?3cz4pv');
+  src:  url('#{$font-path}/iconfont.eot?3cz4pv#iefix') format('embedded-opentype'),
+    url('#{$font-path}/iconfont.ttf?3cz4pv') format('truetype'),
+    url('#{$font-path}/iconfont.woff?3cz4pv') format('woff'),
+    url('#{$font-path}/iconfont.svg?3cz4pv#iconfont') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+// [class^="ion-"], [class*=" ion-"] {
+//   /* use !important to prevent issues with browser extensions that change fonts */
+//   font-family: 'iconfont' !important;
+//   speak: none;
+//   font-style: normal;
+//   font-weight: normal;
+//   font-variant: normal;
+//   text-transform: none;
+//   line-height: 1;
+
+//   /* Better Font Rendering =========== */
+//   -webkit-font-smoothing: antialiased;
+//   -moz-osx-font-smoothing: grayscale;
+// }
+
+.iconfont {
+  font-family: 'iconfont' !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  //   /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  speak: none;
+}
+
+.ion-ios-setting-outline:before, 
+.ion-ios-setting:before, 
+.ion-md-setting-outline:before, 
+.ion-md-setting:before, 
+.ion-ios-redpack-list-outline:before, 
+.ion-ios-redpack-list:before, 
+.ion-md-redpack-list-outline:before, 
+.ion-md-redpack-list:before {
+  @extend .iconfont;
+}
+
+.ion-ios-setting:before, 
+.ion-md-setting:before,
+.ion-ios-setting-outline:before, 
+.ion-md-setting-outline:before
+{
+  content: "\e900";
+  font-size: 24px;
+}
+.ion-ios-redpack-list:before, 
+.ion-md-redpack-list:before,
+.ion-ios-redpack-list-outline:before, 
+.ion-md-redpack-list-outline:before
+{
+  content: "\e901";
+  font-size: 24px;
+}
