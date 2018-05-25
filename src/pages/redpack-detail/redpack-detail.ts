@@ -1,7 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
-import { /*IonicPage, */NavController, NavParams, Platform, Content } from 'ionic-angular';
+import { /*IonicPage, */NavController, NavParams, Platform, Content, App } from 'ionic-angular';
 import { AppManager } from '../../provider/AppManager';
 import { Redpacks } from '../../provider/Redpacks';
+import { TabsPage } from '../../pages/tabs/tabs';
 
 /**
  * Generated class for the RedpackDetailPage page.
@@ -20,6 +21,8 @@ export class RedpackDetailPage {
   errorMsg: string = null;
   redpackData: any = null;
   imgLoaded: boolean = false;
+  
+  answer: string = null;
 
   @ViewChild(Content) content: Content;
 
@@ -28,6 +31,7 @@ export class RedpackDetailPage {
     public navParams: NavParams,
     private appManager: AppManager,
     private redpacks: Redpacks,
+    private app: App,
     private platform: Platform,
   ) {
   }
@@ -52,6 +56,21 @@ export class RedpackDetailPage {
         this.errorMsg = error.message;
         // console.log(error);
       });
+  }
+
+  commit() {
+    if (this.errorMsg) {
+      // 回首页
+      // let homeUrl = window.location.href.split('?')[0];
+      // window.location.href = homeUrl;
+      this.app.getRootNavs()[0].setRoot(TabsPage);
+    } else {
+      // 拆红包
+      // this.redpacks.OpenRedpack
+      this.navCtrl.push('RedpackResultPage', { redpack: this.redpackData, 
+                                               answer: this.answer, 
+                                               has_sign: this.redpackData.has_sign });
+    }
   }
 
   fixedIOSScrollBug() {

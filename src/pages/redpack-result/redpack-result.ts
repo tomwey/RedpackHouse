@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
+import { Redpacks } from '../../provider/Redpacks';
+import { TabsPage } from '../../pages/tabs/tabs';
 /**
  * Generated class for the RedpackResultPage page.
  *
@@ -15,11 +16,41 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class RedpackResultPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  redpackResult: any = null;
+  redpackError: any = null;
+  redpack: any = null;
+
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams,
+    private app: App,
+    private redpacks: Redpacks,
+  ) {
+    this.redpack = this.navParams.data.redpack;
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RedpackResultPage');
+    // console.log('ionViewDidLoad RedpackResultPage');
+    setTimeout(() => {
+      this.openRedpack();
+    }, 200);
+  }
+
+  openRedpack() {
+    this.redpacks.OpenRedpack(this.redpack.id, 
+      this.navParams.data.answer)
+      .then(data => {
+        if (data) {
+          this.redpackResult = data['data'];
+        }
+      })
+      .catch(error => {
+        this.redpackError = error;
+      });
+  }
+
+  goHome() {
+    this.app.getRootNavs()[0].setRoot(TabsPage);
   }
 
 }

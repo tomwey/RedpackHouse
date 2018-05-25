@@ -39,10 +39,10 @@
 <ion-footer>
   <div padding>
     <div class="input-sign-box" *ngIf="redpackData && redpackData.has_sign">
-      <ion-input placeholder="输入口令"></ion-input>
+      <ion-input placeholder="输入口令" [(ngModel)]="answer"></ion-input>
       <p class="help-hint">注意：只有一次机会</p>
     </div>
-    <button ion-button full (click)="commit();" [disabled]="!imgLoaded">拆红包</button>
+    <button ion-button full (click)="commit();" [disabled]="!errorMsg && !imgLoaded && ( redpackData && redpackData.has_sign && !answer)">{{ !!errorMsg ? '回首页' : '拆红包' }}</button>
   </div>
   
 </ion-footer>
