@@ -18,9 +18,13 @@
     <p>{{errorMsg}}</p>
   </div>
 
-  <div class="body" *ngIf="redpackData">
-    <img [src]="redpackData.cover" class="cover" />
-    <ion-list>
+  <div class="body" *ngIf="!!redpackData">
+    <div class="image-loader" *ngIf="!imgLoaded">
+      <ion-spinner name="dots"></ion-spinner>
+    </div>
+    
+    <img [src]="redpackData.cover" class="cover" (load)="imgLoaded = true" />
+    <ion-list [hidden]="!imgLoaded">
       <ion-item>
         <ion-avatar item-left>
           <img [src]="redpackData.owner.avatar" />
@@ -32,13 +36,13 @@
   </div>
 
 </ion-content>
-<ion-footer *ngIf="!!redpackData">
+<ion-footer>
   <div padding>
-    <div class="input-sign-box" *ngIf="redpackData.has_sign">
+    <div class="input-sign-box" *ngIf="redpackData && redpackData.has_sign">
       <ion-input placeholder="输入口令"></ion-input>
       <p class="help-hint">注意：只有一次机会</p>
     </div>
-    <button ion-button full (click)="commit();">拆红包</button>
+    <button ion-button full (click)="commit();" [disabled]="!imgLoaded">拆红包</button>
   </div>
   
 </ion-footer>
