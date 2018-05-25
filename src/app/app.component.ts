@@ -7,6 +7,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { Users } from '../provider/Users';
 import { Utils } from '../provider/Utils';
+import { Tools } from '../provider/Tools';
 
 @Component({
   templateUrl: 'app.html'
@@ -16,6 +17,7 @@ export class MyApp {
 
   constructor(platform: Platform, statusBar: StatusBar,
     private users: Users, 
+    private tools: Tools,
     splashScreen: SplashScreen) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -29,13 +31,24 @@ export class MyApp {
           let provider = Utils.getQueryString('provider');
 
           if (code && provider) {
-            // 跳转登录页面去登录
-            // window.location.href = '一个登录地址';
-            
+            // 绑定登录
+            this.users.bindAuth(code, provider)
+              .then(data => {
+                if (data && data.data) {
+                  let token = data.data.token;
+                  this.users.saveToken(token).then(() => {
+                    this.rootPage = TabsPage;
+                  });
+                } else {
+                  this.tools.showToast('登录失败~');
+                  this.rootPage = LoginPage;
+                }
+              })
+              .catch(error => {
+
+              });
           } else {
-            // this.users.saveToken(_token).then(() => {
-            //   this.rootPage = TabsPage;
-            // });
+            this.tools.showToast('登录失败~');
             this.rootPage = LoginPage;
           }
         } else {

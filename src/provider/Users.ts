@@ -35,4 +35,8 @@ export class Users {
     bindAuth(code: string, provider: string): Promise<any> {
         return this.api.POST('u/auth_bind', { code: code, provider: provider });
     }
+
+    GetAuthUrl(): Promise<any> {
+        return this.api.GET('u/auth', null);
+    }
 }

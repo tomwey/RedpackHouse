@@ -31,16 +31,24 @@ export class Tools {
      * @param content 显示的内容
      */
     showLoading(content: string = ''): void {
-        if ( !this.loadingIsOpen ) {
-        this.loadingIsOpen = true;
-        this.loading = this.loadingCtrl.create({
-            content: content,
-            spinner: 'crescent',
-        });
-        this.loading.present();
-            setTimeout( () => {
-                this.hideLoading();
-            }, 10000 ) // 最长显示10秒
+        // if ( !this.loadingIsOpen ) {
+        // this.loadingIsOpen = true;
+        // this.loading = this.loadingCtrl.create({
+        //     content: content,
+        //     spinner: 'crescent',
+        // });
+        // this.loading.present();
+        //     setTimeout( () => {
+        //         this.hideLoading();
+        //     }, 10000 ) // 最长显示10秒
+        // }
+        if (!this.loading) {
+            let loading = this.loadingCtrl.create({
+                content: content,
+                spinner: 'crescent',
+            });
+            loading.present();
+            this.loading = loading;
         }
     }
 
@@ -48,10 +56,12 @@ export class Tools {
      * 关闭Loading
      */
     hideLoading(): void {
-        console.log('hidden');
-        this.loadingIsOpen && this.loading.dismiss().catch(error => {
+        // setTimeout(() => {//延迟200毫秒可以避免嵌套请求loading重复打开和关闭
+        this.loading && this.loading.dismiss().catch(error => {
+            console.log(`loading error: ${JSON.stringify(error)}`);
         });
-        this.loadingIsOpen = false;
+        this.loading = null;
+        // }, 200);
     }
 
 }

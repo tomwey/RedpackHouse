@@ -22,6 +22,8 @@ const API_KEY:  string = "c896833925be9f17633ffc386c97b1bb";
 @Injectable()
 export class ApiService {
 
+  count: number = 0;
+
   constructor(public http: Http, private tools: Tools) {
     // console.log('Hello ApiService Provider');
   }
@@ -29,7 +31,7 @@ export class ApiService {
   // 处理GET请求
   GET(uri, params, loadingText = '加载中...', showLoading = true) {
     if (showLoading) {
-        this.tools.showLoading(loadingText);
+      this.showLoading(loadingText);
     }
 
     let url = API_HOST + '/' + uri;
@@ -52,16 +54,32 @@ export class ApiService {
     // 参数签名
     searchParams.set('sign', ApiService.signParams(params));
 
-    return this.http.get(url, new RequestOptions({ search: searchParams }))
+    return new Promise((resolve, reject) => {
+      this.http.get(url, new RequestOptions({ search: searchParams }))
       .toPromise()
-      .then(this.handleSuccess)
-      .catch(this.handleError);
+      .then(resp => {
+        this.hideLoading();
+        // console.log('success');
+        let result = this.handleSuccess(resp);
+        if (result.code == 0) {
+          resolve({ data: result.data, total: result.total });
+        } else {
+          reject({code: result.code, message: result.message});
+        }
+      })
+      .catch(error => {
+        this.hideLoading();
+        let err = this.handleError(error);
+        reject(err);
+      });
+    });
+     
   } // end get 
 
   // 处理POST请求
   POST(uri, params, loadingText = '加载中...', showLoading = true) {
     if (showLoading) {
-        this.tools.showLoading(loadingText);
+        this.showLoading(loadingText);
     }
 
     let url = API_HOST + '/' + uri;
@@ -79,10 +97,26 @@ export class ApiService {
     // 封装请求
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let requestOptions = new RequestOptions({ headers: headers });
-    return this.http.post(url, JSON.stringify(params), requestOptions)
+    return new Promise((resolve, reject) => {
+      this.http.post(url, JSON.stringify(params), requestOptions)
       .toPromise()
-      .then(this.handleSuccess)
-      .catch(this.handleError);
+      .then(resp => {
+        this.hideLoading();
+        // console.log('success');
+        let result = this.handleSuccess(resp);
+        if (result.code == 0) {
+          resolve({ data: result.data, total: result.total });
+        } else {
+          reject({code: result.code, message: result.message});
+        }
+      })
+      .catch(error => {
+        this.hideLoading();
+
+        let err = this.handleError(error);
+        reject(err);
+      });
+    });
   } // end post
 
   // 上传文件
@@ -128,21 +162,29 @@ export class ApiService {
 
   // 处理请求成功的回调
   private handleSuccess(resp: Response) {
-    // console.log(resp);
-
-    // this.tools.hideLoading();
-    // console.log(resp);
     let body = resp.json();
-    console.log(`result: ${JSON.stringify(body)}`);
+    // console.log(`result: ${JSON.stringify(body)}`);
     if (body.code == 0) {
       if (body.total) {
-        return { total: body.total, data: body.data };
+        return { code: body.code, total: body.total, data: body.data };
       }
-      return body.data || {};
+      return { code: body.code, data: body.data || {} };
     } else {
-      return Promise.reject({ code: body.code, message: body.message });
+      return { code: body.code, message: body.message };
     }
   } // end handle success
+
+  private handleError(error: Response | any) {
+    let errMsg: string;
+    if ( error instanceof Response ) {
+      const body = error.json() || '';
+      const err  = body.error || JSON.stringify(body);
+      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
+    } else {
+      errMsg = error.message ? error.message : error.toString();
+    }
+    return { code: 500, message: errMsg };
+  } // end handle error 
 
   static signParams(params: any): string {
     if (!params) return null;
@@ -163,19 +205,16 @@ export class ApiService {
     return Md5.hashStr(signStr, false).toString();
   }
 
-  // 处理请求失败的回调
-  private handleError(error: Response | any) {
-    this.tools.hideLoading();
-
-    let errMsg: string;
-    if ( error instanceof Response ) {
-      const body = error.json() || '';
-      const err  = body.error || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-    } else {
-      errMsg = error.message ? error.message : error.toString();
+  private showLoading(loadingText) {
+    if (++this.count === 1) {
+      this.tools.showLoading(loadingText);
     }
-    return Promise.reject({ code: 500, message: errMsg });
-  } // end handle error 
+  }
+
+  private hideLoading() {
+    if (--this.count === 0) {
+      this.tools.hideLoading();
+    }
+  }
 
 }
