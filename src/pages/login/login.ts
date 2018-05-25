@@ -51,10 +51,11 @@ export class LoginPage {
   }
 
   doLogin() {
-    this.users.GetAuthUrl()
+    this.users.GetAuthUrl(window.location.href)
       .then(data => {
         // console.log(data.data);
         if (data && data.data) {
+          // console.log(window.location.href);
           window.location.href = data.data.url;
         } else {
           this.tools.showToast('获取授权登录失败');

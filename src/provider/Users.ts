@@ -18,8 +18,8 @@ export class Users {
         return new Promise((resolve) => {
             this.storage.get('token').then( val => {
                 // resolve('aed672e8bbe94206995a78dc6cd6ed1b'); // 后台wmarshx用户的Token aed672e8bbe94206995a78dc6cd6ed1b
-                // resolve('aa905ea8fca84485a7a4c2e1f0697cb5'); // 本地测试
-                resolve(val)
+                resolve('999ea21a1ce04e0497c4f0f69d2ed5d9'); // 本地测试
+                // resolve(val)
             } );
         });
     }
@@ -32,11 +32,15 @@ export class Users {
         return this.storage.set('token', token);
     }
 
-    bindAuth(code: string, provider: string): Promise<any> {
-        return this.api.POST('u/auth_bind', { code: code, provider: provider });
+    bindAuth(code: string, provider: string, rid): Promise<any> {
+        return this.api.POST('u/auth_bind', { code: code, provider: provider, rid });
     }
 
-    GetAuthUrl(): Promise<any> {
-        return this.api.GET('u/auth', null);
+    GetAuthUrl(url): Promise<any> {
+        return this.api.GET('u/auth', { url: url });
+    }
+
+    logout(): Promise<any> {
+        return this.storage.remove('token');
     }
 }

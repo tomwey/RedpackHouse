@@ -7,6 +7,7 @@ import { HttpModule } from '@angular/http';
 
 import { MyApp } from './app.component';
 
+import { RedpackDetailPage } from '../pages/redpack-detail/redpack-detail';
 import { LoginPage } from '../pages/login/login';
 import { NewRedpackPage } from '../pages/new-redpack/new-redpack';
 import { RedpackListPage } from '../pages/redpack-list/redpack-list';
@@ -19,6 +20,8 @@ import { Utils } from '../provider/Utils';
 import { Tools } from '../provider/Tools';
 import { Users } from '../provider/Users';
 import { ApiService } from '../provider/api-service';
+import { AppManager } from '../provider/AppManager';
+import { Redpacks } from '../provider/Redpacks';
 // import { APIs } from '../provider/APIs';
 // import { ApiService } from '../provider/api-service';
 
@@ -26,6 +29,7 @@ import { ApiService } from '../provider/api-service';
   declarations: [
     MyApp,
     NewRedpackPage,
+    RedpackDetailPage,
     RedpackListPage,
     SettingPage,
     TabsPage,
@@ -45,6 +49,7 @@ import { ApiService } from '../provider/api-service';
     MyApp,
     NewRedpackPage,
     RedpackListPage,
+    RedpackDetailPage,
     SettingPage,
     TabsPage,
     LoginPage,
@@ -59,7 +64,8 @@ import { ApiService } from '../provider/api-service';
     // ApiService,
     Users,
     ApiService,
-    
+    AppManager,
+    Redpacks,
   ]
 })
 export class AppModule {}
