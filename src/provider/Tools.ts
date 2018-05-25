@@ -5,7 +5,7 @@ import { ToastController, LoadingController, Loading } from 'ionic-angular';
 export class Tools {
 
     private loading: Loading;
-    private loadingIsOpen: boolean = false;
+    // private loadingIsOpen: boolean = false;
   
     constructor(private toastCtrl: ToastController,
                 private loadingCtrl: LoadingController) {

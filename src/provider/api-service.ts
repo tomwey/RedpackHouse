@@ -19,6 +19,17 @@ const API_KEY:  string = "c896833925be9f17633ffc386c97b1bb";
 // const API_HOST: string = "http://0.0.0.0:8888/api/v1";
 // const API_KEY:  string = "1e3bb5a6e93148d7a6aa20ce181c1c46";
 
+export interface ResultData {
+  code: number,
+  total?: number,
+  data: any,
+}
+
+export interface ErrorData {
+  code: number,
+  message: string,
+}
+
 @Injectable()
 export class ApiService {
 
@@ -62,9 +73,10 @@ export class ApiService {
         // console.log('success');
         let result = this.handleSuccess(resp);
         if (result.code == 0) {
-          resolve({ data: result.data, total: result.total });
+          resolve(result);
+          // resolve({ data: result.data, total: result.total });
         } else {
-          reject({code: result.code, message: result.message});
+          reject(result);
         }
       })
       .catch(error => {
@@ -105,9 +117,10 @@ export class ApiService {
         // console.log('success');
         let result = this.handleSuccess(resp);
         if (result.code == 0) {
-          resolve({ data: result.data, total: result.total });
+          resolve(result);
+          // resolve({ data: result.data, total: result.total });
         } else {
-          reject({code: result.code, message: result.message});
+          reject(result);
         }
       })
       .catch(error => {
@@ -161,16 +174,15 @@ export class ApiService {
   } // end generate access key
 
   // 处理请求成功的回调
-  private handleSuccess(resp: Response) {
+  private handleSuccess(resp: Response): any {
     let body = resp.json();
     // console.log(`result: ${JSON.stringify(body)}`);
     if (body.code == 0) {
-      if (body.total) {
-        return { code: body.code, total: body.total, data: body.data };
-      }
-      return { code: body.code, data: body.data || {} };
+      let rd: ResultData = { code: 0, total: body.total, data: body.data || {} };
+      return rd;
     } else {
-      return { code: body.code, message: body.message };
+      let errorData: ErrorData = { code:body.code, message: body.message };
+      return errorData;
     }
   } // end handle success
 
@@ -183,7 +195,9 @@ export class ApiService {
     } else {
       errMsg = error.message ? error.message : error.toString();
     }
-    return { code: 500, message: errMsg };
+
+    let errorData: ErrorData = { code:500, message: errMsg };
+    return errorData;
   } // end handle error 
 
   static signParams(params: any): string {

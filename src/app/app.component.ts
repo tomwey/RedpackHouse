@@ -48,7 +48,7 @@ export class MyApp {
 
               });
           } else {
-            this.tools.showToast('登录失败~');
+            // this.tools.showToast('登录失败~');
             this.rootPage = LoginPage;
           }
         } else {
