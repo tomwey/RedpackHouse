@@ -18,6 +18,7 @@ import { Redpacks } from '../../provider/Redpacks';
 export class RedpackDetailPage {
 
   errorMsg: string = null;
+  redpackData: any = null;
 
   constructor(
     public navCtrl: NavController, 
@@ -34,7 +35,14 @@ export class RedpackDetailPage {
       .then(data => {
         this.errorMsg = null;
 
-        console.log(data);
+        console.log(data['data']);
+
+        if (data && data['data']) {
+          this.redpackData = data['data'];
+
+          console.log(this.redpackData);
+        }
+
       })
       .catch(error => {
         this.errorMsg = error.message;

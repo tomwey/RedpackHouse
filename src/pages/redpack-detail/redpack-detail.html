@@ -17,4 +17,22 @@
     <img src="assets/imgs/icon_error.png">
     <p>{{errorMsg}}</p>
   </div>
+
+  <div class="body" *ngIf="redpackData">
+    <img [src]="redpackData.cover" />
+    <ion-list>
+      <ion-item>
+        <ion-avatar item-left>
+          <img [src]="redpackData.owner.avatar" />
+        </ion-avatar>
+        <h2>{{redpackData.owner.nickname}}</h2>
+        <p>个人</p>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  
+  <div padding><button ion-button block (click)="commit();">拆红包</button></div>
+
 </ion-content>
+
