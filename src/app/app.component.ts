@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { TabsPage } from '../pages/tabs/tabs';
 import { LoginPage } from '../pages/login/login';
 import { Users } from '../provider/Users';
+import { Utils } from '../provider/Utils';
 
 @Component({
   templateUrl: 'app.html'
@@ -24,9 +25,20 @@ export class MyApp {
 
       this.users.token().then(token => {
         if (!token) {
-          this.rootPage = LoginPage;
+          let code = Utils.getQueryString('code');
+          let provider = Utils.getQueryString('provider');
+
+          if (code && provider) {
+            // 跳转登录页面去登录
+            // window.location.href = '一个登录地址';
+            
+          } else {
+            // this.users.saveToken(_token).then(() => {
+            //   this.rootPage = TabsPage;
+            // });
+            this.rootPage = LoginPage;
+          }
         } else {
-          // console.log(token);
           this.rootPage = TabsPage;
         }
       });

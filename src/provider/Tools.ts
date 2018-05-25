@@ -48,6 +48,7 @@ export class Tools {
      * 关闭Loading
      */
     hideLoading(): void {
+        console.log('hidden');
         this.loadingIsOpen && this.loading.dismiss().catch(error => {
         });
         this.loadingIsOpen = false;

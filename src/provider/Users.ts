@@ -1,11 +1,13 @@
 import {Injectable } from "@angular/core";
 import { Storage } from '@ionic/storage';
+import { ApiService } from "./api-service";
 
 @Injectable()
 export class Users {
 
     constructor(
         private storage: Storage,
+        private api: ApiService,
     ) {
 
     }
@@ -28,5 +30,9 @@ export class Users {
      */
     saveToken(token: string): Promise<any> {
         return this.storage.set('token', token);
+    }
+
+    bindAuth(code: string, provider: string): Promise<any> {
+        return this.api.POST('u/auth_bind', { code: code, provider: provider });
     }
 }
