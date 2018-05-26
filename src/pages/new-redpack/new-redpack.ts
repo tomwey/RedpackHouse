@@ -24,6 +24,7 @@ export class NewRedpackPage {
     subject: '',
     theme: '',
     audio: '',
+    sign: '',
     _type: 0,
     is_cash_hb: true,
   };
@@ -63,6 +64,10 @@ export class NewRedpackPage {
 
   selectAudio() {
     this.app.getRootNavs()[0].push('RedpackAudioPage', this.redpack);
+  }
+
+  segmentChanged(ev) {
+    
   }
 
 }
