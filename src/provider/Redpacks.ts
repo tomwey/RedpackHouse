@@ -40,4 +40,46 @@ export class Redpacks {
             })
         });
     }
+
+    GetCatalogs() {
+        return new Promise((resolve, reject) => {
+            this.users.token().then(token => {
+                this.api.GET('catalogs', { token: token })
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    });
+            })
+        });
+    }
+
+    GetRedpackThemes(cid) {
+        return new Promise((resolve, reject) => {
+            this.users.token().then(token => {
+                this.api.GET('themes', { cid: cid, token: token })
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    });
+            })
+        });
+    }
+
+    GetRedpackAudios(cid) {
+        return new Promise((resolve, reject) => {
+            this.users.token().then(token => {
+                this.api.GET('audios', { cid: cid, token: token })
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    });
+            })
+        });
+    }
 }
