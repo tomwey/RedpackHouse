@@ -24,7 +24,8 @@ export class NewRedpackPage {
     subject: '',
     theme: '',
     audio: '',
-    use_type: 0,
+    _type: 0,
+    is_cash_hb: true,
   };
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
