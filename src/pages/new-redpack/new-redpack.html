@@ -62,6 +62,6 @@
 
   <div class="total-money">¥ {{calcTotalMoney()}}</div>
   <div padding>
-    <button ion-button full [disabled]="!can_commit">塞钱进红包</button>
+    <button ion-button full [disabled]="!can_commit">{{redpack.is_cash_hb ? '塞钱进红包' : '生成消费红包'}}</button>
   </div>
 </ion-content>
