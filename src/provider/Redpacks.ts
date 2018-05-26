@@ -82,4 +82,19 @@ export class Redpacks {
             })
         });
     }
+
+    CreateRedpack(params) {
+        return new Promise((resolve, reject) => {
+            this.users.token().then(token => {
+                params['token'] = token;
+                this.api.POST('redpack/create', params)
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    });
+            })
+        });
+    }
 }

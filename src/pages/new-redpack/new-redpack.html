@@ -49,7 +49,7 @@
   <ion-card>
     <ion-item>
       <ion-label fixed>红包口令</ion-label>
-      <ion-input type="text" [(ngModel)]="redpack.sign" placeholder="多个口令用英文逗号分隔(,)"></ion-input>
+      <ion-input type="text" [(ngModel)]="redpack.sign" placeholder="多个口令用英文逗号(,)分隔"></ion-input>
     </ion-item>
   </ion-card>
   <div class="help-hint">如果设置红包口令，那么用户需要输口令领红包</div>
@@ -71,9 +71,10 @@
 
   <div class="total-money">¥ {{calcTotalMoney()}}</div>
   <div padding>
-    <button ion-button full [disabled]="!can_commit">
+    <p *ngIf="!!createError" class="error-message">{{createError.message}}</p>
+    <button ion-button full [disabled]="!can_commit" (click)="commit();">
       <!-- {{redpack.is_cash_hb ? '塞钱进红包' : '生成消费红包'}} -->
-      预览红包
+      创建红包
     </button>
   </div>
 </ion-content>

@@ -20,4 +20,10 @@ page-new-redpack {
         font-family: 'PingFang SC';
         // padding: 20px;
     }
+
+    .error-message {
+        font-size: 14px;
+        color: color($colors, primary);
+        text-align: center;
+    }
 }
