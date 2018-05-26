@@ -20,12 +20,14 @@ export class RedpackThemePage {
 
   catalogs: any = [];
   commonData: any = [];
-
   selectedCatalogIndex: number = 0;
+
+  redpack: any = null;
 
   constructor(public navCtrl: NavController, 
     private redpacks: Redpacks,
     public navParams: NavParams) {
+      this.redpack = this.navParams.data;
   }
 
   ionViewDidLoad() {
@@ -49,6 +51,16 @@ export class RedpackThemePage {
       })
   }
 
+  selectItem(item) {
+    // console.log(item);
+    // this.selectedItem = item;
+    this.redpack.theme = item;
+  }
+
+  ok() {
+    this.navCtrl.pop();
+  }
+
   loadData() {
     if (this.selectedCatalogIndex >= this.catalogs.length) {
       return;
@@ -60,6 +72,9 @@ export class RedpackThemePage {
       .then(res => {
         if (res && res['data']) {
           this.commonData = res['data'];
+
+          this.redpack.theme = this.redpack.theme || this.commonData[0];
+          // this.selectedItem = this.commonData[0];
         }
       })
       .catch(error => {

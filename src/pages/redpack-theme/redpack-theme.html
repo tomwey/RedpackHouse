@@ -8,6 +8,11 @@
 
   <ion-navbar>
     <ion-title>选择红包模板</ion-title>
+    <ion-buttons end>
+      <button ion-button (click)="ok()">
+        确定
+      </button>
+    </ion-buttons>
   </ion-navbar>
   <ion-toolbar>
     <ion-segment [(ngModel)]="theme_type" (ionChange)="segmentChanged($event)">
@@ -38,11 +43,15 @@
         <div class="main-content">
           <ion-grid>
             <ion-row>
-              <ion-col col-6 *ngFor="let item of commonData">
-                <ion-card>
+              <ion-col col-6 *ngFor="let item of commonData;">
+                <ion-card (tap)="selectItem(item);">
                     <img [src]="item.icon"/>
-                    <p class="card-title">{{item.name}}</p>
-                    <!-- <div class="card-subtitle">72 Listings</div> -->
+                    <div class="card-title">
+                      {{item.name}}
+                    </div>
+                    <div class="selected" *ngIf="redpack.theme && redpack.theme.id === item.id">
+                        <ion-icon name="ios-checkmark-outline"></ion-icon>
+                    </div>
                 </ion-card>
               </ion-col>
             </ion-row>

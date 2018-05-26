@@ -58,7 +58,7 @@
   <ion-card>
     <button ion-item (click)="selectTheme();">
       <ion-label fixed>红包模板</ion-label>
-      <ion-note item-right>默认模板</ion-note>
+      <ion-note item-right>{{!!redpack.theme ? redpack.theme.name : '默认模板'}}</ion-note>
     </button>
   </ion-card>
 
