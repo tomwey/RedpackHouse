@@ -1,6 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Redpacks } from '../../provider/Redpacks';
+import { AudioProvider } from 'ionic-audio';
 
 /**
  * Generated class for the RedpackAudioPage page.
@@ -24,8 +25,12 @@ export class RedpackAudioPage {
 
   redpack: any = null;
 
+  myTracks: any[];
+  allTracks: any[];
+
   constructor(public navCtrl: NavController, 
     private redpacks: Redpacks,
+    private _audioProvider: AudioProvider,
     public navParams: NavParams) {
       this.redpack = this.navParams.data;
   }
@@ -35,6 +40,11 @@ export class RedpackAudioPage {
     setTimeout(() => {
       this.loadCatalogs();
     }, 200);
+  }
+
+  ngAfterContentInit() {     
+    // get all tracks managed by AudioProvider so we can control playback via the API
+    this.allTracks = this._audioProvider.tracks; 
   }
 
   loadCatalogs() {
@@ -51,12 +61,16 @@ export class RedpackAudioPage {
       })
   }
 
-  selectItem(item) {
-    this.redpack.audio = item;
+  selectItem(index) {
+    this.redpack.audio = this.commonData[index];
   }
 
   ok() {
     this.navCtrl.pop();
+  }
+
+  ionViewWillLeave() {
+    this._audioProvider.stop();
   }
 
   loadData() {
@@ -70,6 +84,20 @@ export class RedpackAudioPage {
       .then(res => {
         if (res && res['data']) {
           this.commonData = res['data'];
+
+          this.myTracks = [];
+
+          this.commonData.forEach(item => {
+            this.myTracks.push(
+              {
+                src: item.file,
+                artist: '',
+                title: item.name,
+                art: '',
+                preload: 'metadata'
+              }
+            );
+          });
         }
       })
       .catch(error => {
@@ -81,9 +109,9 @@ export class RedpackAudioPage {
     this.selectedCatalogIndex = index;
     this.loadData();
   }
-
-  play() {
-
+         
+  onTrackFinished(track: any) {
+    // console.log('Track finished', track)
   }
 
   segmentChanged(ev) {

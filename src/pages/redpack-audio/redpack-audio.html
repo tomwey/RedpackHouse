@@ -8,6 +8,11 @@
 
     <ion-navbar>
       <ion-title>选择红包音效</ion-title>
+      <ion-buttons end>
+          <button ion-button (click)="ok()">
+            确定
+          </button>
+        </ion-buttons>
     </ion-navbar>
     <ion-toolbar>
       <ion-segment [(ngModel)]="audio_type" (ionChange)="segmentChanged($event)">
@@ -36,31 +41,21 @@
           </ion-col>
           <ion-col col-9>
             <div class="main-content">
-              <ion-grid>
-                <ion-row>
-                  <ion-col col-6 *ngFor="let item of commonData;">
-                    <ion-card (tap)="selectItem(item);">
-                      <!-- <div class="audio-box">
-                          <audio [src]="item.file" controls="controls"></audio>
-                      </div>
-                      
-                      <div class="card-title">
-                        {{item.name}}
-                      </div> -->
-                      <div class="audio-box">
-                        <button ion-button icon-only clear (click)="play();">
-                          <ion-icon name="ios-play-outline" color="primary"></ion-icon>
-                        </button>
-                        <p class="name">{{item.name}}</p>
-                        <audio [src]="item.file" #audio></audio>
-                      </div>
-                      <div class="selected" *ngIf="redpack.audio && redpack.audio.id === item.id">
-                        <ion-icon name="ios-checkmark-outline"></ion-icon>
-                      </div>
-                    </ion-card>
-                  </ion-col>
-                </ion-row>
-              </ion-grid>
+                
+              <audio-track #audio *ngFor="let track of myTracks;let i = index;"  [track]="track" (onFinish)="onTrackFinished($event)">
+                <ion-card class="custom-card" [class.active]="redpack.audio && redpack.audio.id == commonData[i].id">
+                  <button ion-item (click)="selectItem(i);" detail-none>
+                    <div item-left>
+                      <audio-track-play dark [audioTrack]="audio"><ion-spinner color="primary"></ion-spinner></audio-track-play>
+                    </div>
+                    <div item-content style="width:100%">
+                      <p><strong>{{audio.title}}</strong></p>
+                      <audio-track-progress-bar primary duration progress [audioTrack]="audio" ></audio-track-progress-bar>
+                    </div>
+                  </button> 
+                </ion-card>   
+              </audio-track>
+                
             </div>
           </ion-col>
         </ion-row>

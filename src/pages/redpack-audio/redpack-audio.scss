@@ -28,54 +28,14 @@ page-redpack-audio {
             padding: 0!important;
         }
 
-        ion-card {
-            position: relative;
-            text-align: center;
-            margin: 6px;
-            width: calc(100% - 10px);
-        }
-    
-        .card-title {
-            // background: rgba(0,0,0,0.8);
-            margin: 0;
-            text-align: center;
-            padding: 5px 10px;
-            // position: absolute;
-            // bottom: 0;
-            width: 100%;
-            color: #333;
-            font-size: 12px;
-            // text-overflow: ellipsis;
-            // white-space: nowrap;
-            // overflow: hidden;
-            // text-overflow: clip;
-        }
-
-        .audio-box {
-            // padding: 30px;
-            text-align: center;
-            // background: red;
-            padding: 10px;
-            padding-bottom: 15px;
-        }
-
-        .selected {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            width: 30px;
-            height: 30px;
-            line-height: 30px;
-            border-radius: 50%;
-            // background: rgba(0,0,0,0.6);
-            // border: 0.55px solid color($colors, primary);
-            text-align: center;
-            ion-icon {
-                color: color($colors, primary); 
-                font-size: 32px;
+        .custom-card {
+            box-shadow: none;
+            -webkit-box-shadow: none;
+            &.active {
+                border: 0.55px solid color($colors, primary);
             }
-            
         }
+
     }
 
     .theme-custom {
