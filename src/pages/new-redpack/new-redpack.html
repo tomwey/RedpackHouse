@@ -47,14 +47,14 @@
   </ion-card>  
 
   <ion-card>
-    <button ion-item>
+    <button ion-item (click)="selectTheme();">
       <ion-label fixed>红包模板</ion-label>
-      <ion-note item-right>选择一个红包模板</ion-note>
+      <ion-note item-right>默认模板</ion-note>
     </button>
   </ion-card>
 
   <ion-card>
-    <button ion-item>
+    <button ion-item (click)="selectAudio();">
       <ion-label fixed>红包音效</ion-label>
       <ion-note item-right>设置红包音效</ion-note>
     </button>
@@ -62,6 +62,9 @@
 
   <div class="total-money">¥ {{calcTotalMoney()}}</div>
   <div padding>
-    <button ion-button full [disabled]="!can_commit">{{redpack.is_cash_hb ? '塞钱进红包' : '生成消费红包'}}</button>
+    <button ion-button full [disabled]="!can_commit">
+      <!-- {{redpack.is_cash_hb ? '塞钱进红包' : '生成消费红包'}} -->
+      预览红包
+    </button>
   </div>
 </ion-content>

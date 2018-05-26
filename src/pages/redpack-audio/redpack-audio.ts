@@ -15,6 +15,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class RedpackAudioPage {
 
+  audio_type = '通用';
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 

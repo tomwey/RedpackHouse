@@ -6,13 +6,21 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>RedpackAudio</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+      <ion-title>选择红包音效</ion-title>
+    </ion-navbar>
+    <ion-toolbar>
+      <ion-segment [(ngModel)]="audio_type" (ionChange)="segmentChanged($event)">
+        <ion-segment-button value="common">
+          通用
+        </ion-segment-button>
+        <ion-segment-button value="custom">
+          自定义
+        </ion-segment-button>
+      </ion-segment>
+    </ion-toolbar>
+  </ion-header>
 
-</ion-header>
-
-
-<ion-content padding>
+<ion-content>
 
 </ion-content>

@@ -15,11 +15,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class RedpackThemePage {
 
+  theme_type: string = 'common';
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad RedpackThemePage');
+    // console.log('ionViewDidLoad RedpackThemePage');
+  }
+
+  segmentChanged(ev) {
+
   }
 
 }
