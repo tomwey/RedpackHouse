@@ -36,7 +36,14 @@ page-redpack-result {
     .result {
         margin-top: 30px;
         // padding: 20px;
-
+        .summary {
+            font-size: 14px;
+            color: #666;
+            text-align: center;
+            .red {
+                color: color($colors, primary);
+            }
+        }
         .message {
             padding: 20px;
             margin-bottom: 60px;

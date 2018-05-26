@@ -18,12 +18,15 @@
     <h2 class="name">{{redpack.owner.nickname}}</h2>
   </div>
   <div class="result result-success" *ngIf="!!redpackResult">
+    <p class="summary">
+      恭喜您获得一个<span class="red">
+        {{redpackResult.is_cash ? '现金' : '非现金'}}红包</span></p>
     <div class="message">
       {{redpackResult.money}} <span class="unit">元</span>
     </div>
     <div padding>
       <button ion-button full (click)="goHome()">
-        点击领取红包
+        {{redpackResult.is_cash ? '点击领取红包' : '点击消费红包'}}
       </button>
     </div>
   </div>
