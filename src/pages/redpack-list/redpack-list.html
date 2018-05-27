@@ -8,9 +8,9 @@
 
   <ion-navbar color="white">
     <!-- <ion-title>RedpackList</ion-title> -->
-    <ion-segment [(ngModel)]="redpack_type">
-      <ion-segment-button value="take">
-        抢到的红包
+    <ion-segment [(ngModel)]="redpack_type" (ionChange)="segmentChanged($event)" >
+      <ion-segment-button value="taked">
+        收到的红包
       </ion-segment-button>
       <ion-segment-button value="sent">
         发出的红包
@@ -20,7 +20,59 @@
 
 </ion-header>
 
+<ion-content>
+  <div class="user-stats">
+    <div class="year-filter">
+      <ion-select [(ngModel)]="currentYear" okText="确定" cancelText="取消">
+        <ion-option *ngFor="let year of years">{{year}}</ion-option>
+      </ion-select>
+    </div>
 
-<ion-content padding>
-
+    <div class="user-info" *ngIf="!!listData">
+      <img [src]="listData.user.avatar" />
+      <p class="text-tip">
+        {{listData.user.nickname}}{{redpack_type == 'taked' ? '共收到' : '共发出'}}
+      </p>
+      <div class="hb-stat">
+        <ion-row>
+          <ion-col col-6>
+            <div class="cash-hb stat-box">
+              <p class="money">{{listData.user.c_money}}<span class="unit">元</span></p>
+              <!-- <p class="quantity">{{listData.user.c_count}}<span class="unit">个</span></p> -->
+              <p class="text-tip">现金红包</p>
+            </div>
+          </ion-col>
+          <ion-col col-6>
+              <div class="no-cash-hb stat-box">
+                <p class="money">{{listData.user.nc_money}}<span class="unit">元</span></p>
+                <!-- <p class="quantity">{{listData.user.nc_count}}<span class="unit">个</span></p> -->
+                <p class="text-tip">消费红包</p>
+              </div>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+  </div>
+  <div class="data-list">
+    <ion-list *ngIf="redpack_type == 'taked' && listData && listData.list">
+      <ion-item *ngFor="let item of listData.list" >
+        <div item-left class="left-content">
+          <h2 class="name">{{item.hb_sender.nickname}}</h2>
+          <p>{{item.time}}</p>
+          
+        </div>
+        <div item-right class="right-content">
+          <h2 class="money">
+              <span class="pin" *ngIf="item.redpack.is_pin">拼</span>{{item.money}} 元
+          </h2>
+          <p>  
+            <span class="use-type">
+              {{item.redpack.is_cash ? '现金红包' : '消费红包'}}
+            </span>
+          </p>
+        </div>
+      </ion-item>
+    </ion-list>
+  </div>
+  
 </ion-content>

@@ -97,4 +97,22 @@ export class Redpacks {
             })
         });
     }
+
+    GetMyRedpacks(action, year = null) {
+        return new Promise((resolve, reject) => {
+            this.users.token().then(token => {
+                this.api.GET(`user/${action}/redpacks`, 
+            {
+                token: token,
+                year: year
+            })
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    });
+            })
+        });
+    }
 }
