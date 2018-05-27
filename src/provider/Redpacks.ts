@@ -115,4 +115,19 @@ export class Redpacks {
             })
         });
     }
+
+    OperateRedpack(action, id) {
+        return new Promise((resolve, reject) => {
+            this.users.token().then(token => {
+                // params['token'] = token;
+                this.api.POST(`redpack/${action}`, { token: token, id: id })
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    });
+            })
+        });
+    }
 }

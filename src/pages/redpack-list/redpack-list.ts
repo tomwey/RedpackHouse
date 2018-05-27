@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { /*IonicPage, */NavController, NavParams, App, ModalController } from 'ionic-angular';
+import { /*IonicPage, */NavController, NavParams, App, ModalController, AlertController } from 'ionic-angular';
 import { Redpacks } from '../../provider/Redpacks';
 
 /**
@@ -26,6 +26,7 @@ export class RedpackListPage {
     private redpacks: Redpacks,
     private app: App,
     private modalCtrl: ModalController,
+    private alertCtrl: AlertController,
     public navParams: NavParams) {
     this.generateYears();
   }
@@ -78,6 +79,34 @@ export class RedpackListPage {
 
   openOrClose(redpack, event) {
     event.stopPropagation();
+
+    let action_name = redpack.in_use ? '关闭' : '打开';
+    let action = redpack.in_use ? 'close' : 'open';
+
+    this.alertCtrl.create({
+      title: '红包操作提示',
+      message: `您确定要${action_name}红包吗？`,
+      buttons: [
+        {
+          text: '取消',
+          role: 'cancel',
+          handler: () => {
+            // console.log('Cancel clicked');
+          }
+        },
+        {
+          text: '确定',
+          handler: () => {
+            // console.log('Buy clicked');
+            this.redpacks.OperateRedpack(action, redpack.id)
+              .then(res => {
+                redpack.in_use = !redpack.in_use;
+              })
+              .catch(error => {});
+          }
+        }
+      ]
+    }).present();
   }
 
   yearChanged(ev) {
