@@ -53,7 +53,7 @@ export class RedpackListPage {
 
   loadData() {
     const year = this.currentYear.substr(0, this.currentYear.length - 1);
-    console.log(year);
+    // console.log(year);
     this.redpacks.GetMyRedpacks(this.redpack_type, year)
       .then(res => {
         if (res && res['data']) {
@@ -78,6 +78,11 @@ export class RedpackListPage {
 
   openOrClose(redpack, event) {
     event.stopPropagation();
+  }
+
+  yearChanged(ev) {
+    // console.log(ev);
+    this.loadData();
   }
 
 }

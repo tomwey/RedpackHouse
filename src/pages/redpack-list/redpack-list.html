@@ -23,7 +23,8 @@
 <ion-content>
   <div class="user-stats">
     <div class="year-filter">
-      <ion-select [(ngModel)]="currentYear" okText="确定" cancelText="取消">
+      <ion-select [(ngModel)]="currentYear" 
+        okText="确定" cancelText="取消" (ionChange)="yearChanged($event);">
         <ion-option *ngFor="let year of years">{{year}}</ion-option>
       </ion-select>
     </div>
