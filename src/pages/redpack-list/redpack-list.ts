@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { /*IonicPage, */NavController, NavParams } from 'ionic-angular';
+import { /*IonicPage, */NavController, NavParams, App, ModalController } from 'ionic-angular';
 import { Redpacks } from '../../provider/Redpacks';
 
 /**
@@ -24,6 +24,8 @@ export class RedpackListPage {
 
   constructor(public navCtrl: NavController, 
     private redpacks: Redpacks,
+    private app: App,
+    private modalCtrl: ModalController,
     public navParams: NavParams) {
     this.generateYears();
   }
@@ -61,6 +63,21 @@ export class RedpackListPage {
       .catch(error => {
 
       });
+  }
+
+  viewRedpack(redpack) {
+    // console.log(redpack);
+    this.app.getRootNavs()[0].push('RedpackHistoryPage', redpack);
+  }
+
+  updateRedpack(redpack, event) {
+    event.stopPropagation();
+
+    this.modalCtrl.create('RedpackEditPage', redpack).present();
+  }
+
+  openOrClose(redpack, event) {
+    event.stopPropagation();
   }
 
 }
