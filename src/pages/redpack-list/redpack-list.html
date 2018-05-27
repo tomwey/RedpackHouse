@@ -56,7 +56,7 @@
   <div class="data-list">
     <ion-list *ngIf="redpack_type == 'taked' && listData && listData.list">
       <ion-item *ngFor="let item of listData.list" >
-        <div item-left class="left-content">
+        <div class="left-content">
           <h2 class="name">{{item.hb_sender.nickname}}</h2>
           <p>{{item.time}}</p>
           
@@ -65,11 +65,25 @@
           <h2 class="money">
               <span class="pin" *ngIf="item.redpack.is_pin">拼</span>{{item.money}} 元
           </h2>
-          <p>  
-            <span class="use-type">
-              {{item.redpack.is_cash ? '现金红包' : '消费红包'}}
-            </span>
+          <p class="use-type">  
+            {{item.redpack.is_cash ? '现金红包' : '消费红包'}}
           </p>
+        </div>
+      </ion-item>
+    </ion-list>
+    <ion-list *ngIf="redpack_type == 'sent' && listData && listData.list">
+      <ion-item *ngFor="let item of listData.list" >
+        <div class="left-content">
+          <h2 class="name">{{item.is_cash ? '现金红包' : '消费红包'}}</h2>
+          <p>{{item.time}}</p>
+        </div>
+        <div item-right class="right-content">
+          <h2 class="money">
+              <span class="pin" *ngIf="item.is_pin">拼</span>{{item.total_money}} 元
+          </h2>
+          <button ion-button>
+            {{item.in_use ? '关闭' : '打开'}}
+          </button>
         </div>
       </ion-item>
     </ion-list>

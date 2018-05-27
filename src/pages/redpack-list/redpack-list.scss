@@ -5,8 +5,8 @@ page-redpack-list {
 
         .year-filter {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 10px;
+            right: 10px;
 
             clear: right;
             ion-select {
@@ -18,7 +18,7 @@ page-redpack-list {
 
         .user-info {
             text-align: center;
-            margin-top: 60px;
+            margin-top: 30px;
             img {
                 max-width: 88px;
                 // border-radius: 50%;
@@ -35,7 +35,7 @@ page-redpack-list {
                 // background: red;
                 // text-align: right;
                 // padding-right:20px;
-                margin-top: 20px;
+                // margin-top: 20px;
                 .unit {
                     font-size: 12px;
                     color: #666;

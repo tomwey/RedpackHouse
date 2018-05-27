@@ -45,6 +45,7 @@ export class RedpackListPage {
   }
 
   segmentChanged(ev) {
+    this.listData = null;
     this.loadData();
   }
 
