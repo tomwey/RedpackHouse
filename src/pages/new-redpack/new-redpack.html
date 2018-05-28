@@ -21,7 +21,7 @@
   <ion-card>
     <ion-item>
       <ion-label fixed><span class="pin" *ngIf="use_type == 0">拼</span>{{ use_type == 0 ? '总金额' : '单个金额' }} <span class="required">*</span></ion-label>
-      <ion-input type="number" [(ngModel)]="redpack.money" placeholder="0.00"></ion-input>
+      <ion-input type="number" [(ngModel)]="redpack.money" (input)="inputChanged();" placeholder="0.00"></ion-input>
       <ion-note item-right>元</ion-note>
     </ion-item>
   </ion-card>
@@ -31,7 +31,7 @@
   <ion-card>
     <ion-item>
       <ion-label fixed>红包个数 <span class="required">*</span></ion-label>
-      <ion-input type="number" [(ngModel)]="redpack.quantity" placeholder="填写个数"></ion-input>
+      <ion-input type="number" [(ngModel)]="redpack.quantity" (input)="inputChanged();" placeholder="填写个数"></ion-input>
       <ion-note item-right>个</ion-note>
     </ion-item>
   </ion-card>
@@ -76,7 +76,8 @@
 
   <div class="total-money">¥ {{calcTotalMoney()}}</div>
   <div padding>
-    <p *ngIf="!!createError" class="error-message">{{createError.message}}</p>
+    <p *ngIf="!!createError" class="error-message">{{createError.code == 500 ? 
+      '服务器出错了~' : createError.message}}</p>
     <button ion-button full [disabled]="!can_commit" (click)="commit();">
       <!-- {{redpack.is_cash_hb ? '塞钱进红包' : '生成消费红包'}} -->
       创建红包

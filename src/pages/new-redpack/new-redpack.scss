@@ -26,4 +26,8 @@ page-new-redpack {
         color: color($colors, primary);
         text-align: center;
     }
+
+    .card-ios {
+        box-shadow: none;
+    }
 }

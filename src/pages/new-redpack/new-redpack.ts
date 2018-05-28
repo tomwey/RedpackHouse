@@ -55,7 +55,7 @@ export class NewRedpackPage {
   }
 
   calcTotalMoney() {
-    this.can_commit = this.redpack.money && this.redpack.quantity;
+    // this.can_commit = this.redpack.money && this.redpack.quantity;
     
     let money = this.redpack.money || 0.00;
     let quantity = this.redpack.quantity || 0;
@@ -64,6 +64,13 @@ export class NewRedpackPage {
     } else {
       return parseFloat(money) * quantity;
     }
+  }
+
+  inputChanged() {
+    // console.log(this.redpack.money);
+    // console.log(this.redpack.quantity);
+
+    this.can_commit = (this.redpack.money && parseInt(this.redpack.quantity) > 0);
   }
 
   selectTheme() {
