@@ -130,4 +130,20 @@ export class Redpacks {
             })
         });
     }
+
+    UpdateRedpack(id, params) {
+        return new Promise((resolve, reject) => {
+            this.users.token().then(token => {
+                params['token'] = token;
+                params['id'] = id;
+                this.api.POST(`redpack/update`, params)
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    });
+            })
+        });
+    }
 }

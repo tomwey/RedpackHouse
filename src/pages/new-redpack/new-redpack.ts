@@ -82,7 +82,7 @@ export class NewRedpackPage {
     params['_type'] = this.use_type;
     params['use_type'] = this.redpack.is_cash_hb ? 1 : 2;
     params['subject'] = this.redpack.subject;
-    params['sign'] = this.redpack.sign;
+    params['sign_val'] = this.redpack.sign;
 
     if (this.redpack.theme) {
       params['theme_id'] = this.redpack.theme.id;
