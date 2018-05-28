@@ -14,6 +14,9 @@ import { RedpackListPage } from '../pages/redpack-list/redpack-list';
 import { SettingPage } from '../pages/setting/setting';
 import { TabsPage } from '../pages/tabs/tabs';
 
+import { RedpackOwnerScanPage} from '../pages/redpack-owner-scan/redpack-owner-scan';
+import { UserScanRedpackPage } from '../pages/user-scan-redpack/user-scan-redpack';
+
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { Utils } from '../provider/Utils';
@@ -34,6 +37,8 @@ import { Redpacks } from '../provider/Redpacks';
     SettingPage,
     TabsPage,
     LoginPage,
+    RedpackOwnerScanPage,
+    UserScanRedpackPage,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +58,8 @@ import { Redpacks } from '../provider/Redpacks';
     SettingPage,
     TabsPage,
     LoginPage,
+    RedpackOwnerScanPage,
+    UserScanRedpackPage,
   ],
   providers: [
     StatusBar,

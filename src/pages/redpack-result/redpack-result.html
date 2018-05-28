@@ -20,13 +20,18 @@
   <div class="result result-success" *ngIf="!!redpackResult">
     <p class="summary">
       恭喜您获得一个<span class="red">
-        {{redpackResult.is_cash ? '现金' : '非现金'}}红包</span></p>
+        {{redpackResult.is_cash ? '现金' : '消费'}}红包</span></p>
     <div class="message">
       {{redpackResult.money}} <span class="unit">元</span>
+      
+      <img [src]="redpackResult.qrcode_url" 
+        *ngIf="!!redpackResult.qrcode_url" 
+        class="qrcode-img" />
+      <p class="help-text">商家扫二维码，确认消费抵扣</p>
     </div>
     <div padding>
       <button ion-button full (click)="goHome()">
-        {{redpackResult.is_cash ? '点击领取红包' : '点击消费红包'}}
+        {{redpackResult.is_cash ? '回首页领取红包' : '回首页'}}
       </button>
     </div>
   </div>

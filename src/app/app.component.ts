@@ -11,6 +11,9 @@ import { Utils } from '../provider/Utils';
 import { Tools } from '../provider/Tools';
 import { AppManager } from '../provider/AppManager';
 
+import { RedpackOwnerScanPage } from '../pages/redpack-owner-scan/redpack-owner-scan';
+import { UserScanRedpackPage } from '../pages/user-scan-redpack/user-scan-redpack';
+
 @Component({
   templateUrl: 'app.html'
 })
@@ -29,6 +32,8 @@ export class MyApp {
       splashScreen.hide();
 
       let rid = Utils.getQueryString('rid');
+      let rrid = Utils.getQueryString('rrid');
+      let uid = Utils.getQueryString('rrid');
 
       this.users.token().then(token => {
         if (!token) {
@@ -43,14 +48,7 @@ export class MyApp {
                   let token = data.data.token;
                   this.users.saveToken(token).then(() => {
                     // this.rootPage = TabsPage;
-                    if (!rid) {
-                      this.rootPage = TabsPage;
-                    } else {
-                      // 抢红包界面
-                      // console.log(rid);
-                      this.appManager.shareData = { rid: rid };
-                      this.rootPage = RedpackDetailPage;
-                    }
+                    this.handlePageForward({ rid: rid, rrid: rrid, uid: uid });
                   });
                 } else {
                   this.tools.showToast('登录失败~');
@@ -66,16 +64,37 @@ export class MyApp {
           }
         } else {
           // this.rootPage = TabsPage;
-          if (!rid) {
+          /*if (!rid) {
             this.rootPage = TabsPage;
           } else {
             // 抢红包界面
             // console.log(rid);
             this.appManager.shareData = { rid: rid };
             this.rootPage = RedpackDetailPage;
-          }
+          }*/
+
+          this.handlePageForward({ rid: rid, rrid: rrid, uid: uid });
         }
       });
     });
+  }
+
+  handlePageForward(params) {
+    if (!params.rid && !params.rrid && !params.uid) { // APP入口没有带参数
+      this.rootPage = TabsPage;
+    } else {
+      // 抢红包界面
+      // console.log(rid);
+      this.appManager.shareData = params;
+
+      if (params.rid) { // ?rid=1234 跳转到红包详情
+        this.rootPage = RedpackDetailPage;
+      } else if (params.rrid) { // ?rrid=18303030 商家扫用户确认消费抵扣
+        this.rootPage = RedpackOwnerScanPage;
+      } else if (params.uid) { // ?uid=4948484 用户扫商家的二维码抢红包
+        this.rootPage = UserScanRedpackPage;
+      }
+      
+    }
   }
 }
