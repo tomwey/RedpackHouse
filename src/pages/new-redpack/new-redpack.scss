@@ -27,7 +27,17 @@ page-new-redpack {
         text-align: center;
     }
 
+    // 去除阴影效果
     .card-ios {
         box-shadow: none;
     }
+
+    // 设置输入框placeholder的字体大小
+    ion-input {
+        ::placeholder {
+            font-size: 15px !important; 
+            padding-top: 2px;
+        }
+    }
+
 }
