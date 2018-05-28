@@ -9,7 +9,7 @@
   <ion-navbar>
     <ion-title>发红包</ion-title>
     <ion-buttons end>
-      <button ion-button [disabled]="!can_commit">
+      <button ion-button [disabled]="!can_commit" (click)="previewRedpack();">
         预览红包
       </button>
     </ion-buttons>

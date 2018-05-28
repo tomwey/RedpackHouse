@@ -110,6 +110,16 @@ export class NewRedpackPage {
       });
   }
 
+  previewRedpack() {
+    let modal = this.modalCtrl.create('RedpackPreviewPage', this.redpack);
+    modal.onDidDismiss((data) => {
+      if (data === 1) {
+        this.commit();
+      }
+    });
+    modal.present();
+  }
+
   resetForm() {
     this.redpack = {
       money: '',

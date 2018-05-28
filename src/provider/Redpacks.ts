@@ -164,4 +164,40 @@ export class Redpacks {
             })
         });
     }
+
+    PreviewRedpack(subject, theme_id, audio_id) {
+        return new Promise((resolve, reject) => {
+            this.users.token().then(token => {
+                this.api.POST(`redpack/preview`, {
+                    token: token,
+                    subject: subject,
+                    theme_id: theme_id,
+                    audio_id: audio_id,
+                })
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    });
+            })
+        });
+    }
+
+    PreviewRedpackUse(id) {
+        return new Promise((resolve, reject) => {
+            this.users.token().then(token => {
+                this.api.POST(`redpack/preview/use`, {
+                    token: token,
+                    id: id,
+                })
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    });
+            })
+        });
+    }
 }
