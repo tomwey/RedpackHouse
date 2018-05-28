@@ -76,7 +76,8 @@ export class RedpackListPage {
     if (this.redpack_type == 'taked') {
       data['redpack_earn'] = {
         money: item.money,
-        is_cash: item.redpack && item.redpack.is_cash
+        is_cash: item.redpack && item.redpack.is_cash,
+        qrcode_url: item.qrcode_url,
       };
     }
 

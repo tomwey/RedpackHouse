@@ -21,12 +21,19 @@
   <div class="earnings" *ngIf="!!redpack_earn">
     <p class="money">{{redpack_earn.money}} <span class="unit">元</span></p>
     <p class="help-text">{{redpack_earn.is_cash ? '已存入钱包，可直接提现' : '消费红包，可直接抵扣'}}</p>
+    <!-- 消费二维码 -->
+    <img [src]="redpack_earn.qrcode_url" class="qrcode-img" *ngIf="redpack_earn && redpack_earn.qrcode_url" />
+    <p class="help-text">商家扫二维码，确认消费抵扣</p>
   </div>
 
   <p class="hb-summary" text-wrap *ngIf="!!redpack">{{!redpack_earn ? 
     redpack.total_count + '个'+ (redpack.is_cash ? '现金' : '消费') +'红包共' + redpack.total_money + '元' : 
     '领取'+ redpack.sent_count + '/' + redpack.total_count +'个'}}</p>
+  
+  <!-- 加载数据出错显示 -->
   <div class="empty-error-box" *ngIf="!!dataError">{{dataError}}</div>
+
+  <!-- 红包历史 -->
   <ion-list>
     <ion-item *ngFor="let item of results">
       <ion-avatar item-left>
