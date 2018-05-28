@@ -31,6 +31,9 @@ export class NewRedpackPage {
     is_cash_hb: true,
   };
 
+  moneyRegex = /^[1-9]\d*$/;
+  quantityRegex = /^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$/;
+
   @ViewChild(Content) content: Content;
 
   constructor(public navCtrl: NavController, 
@@ -67,11 +70,19 @@ export class NewRedpackPage {
   }
 
   inputChanged() {
-    // console.log(this.redpack.money);
-    // console.log(this.redpack.quantity);
-
-    this.can_commit = (this.redpack.money && parseInt(this.redpack.quantity) > 0);
+    this.can_commit = (parseFloat(this.redpack.money) > 0.00 
+          && parseInt(this.redpack.quantity) > 0);
   }
+
+  // moneyChange(value) {
+  //   this.cdRef.detectChanges();
+  //   this.redpack.money = this.moneyRegex.test(value) ? value : this.redpack.money;
+  // }
+
+  // quantityChange(value) {
+  //   this.cdRef.detectChanges();
+  //   this.redpack.quantity = this.quantityRegex.test(value) ? value : this.redpack.quantity;
+  // }
 
   selectTheme() {
     this.app.getRootNavs()[0].push('RedpackThemePage', this.redpack);

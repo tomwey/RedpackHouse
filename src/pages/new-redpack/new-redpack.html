@@ -21,7 +21,9 @@
   <ion-card>
     <ion-item>
       <ion-label fixed><span class="pin" *ngIf="use_type == 0">拼</span>{{ use_type == 0 ? '总金额' : '单个金额' }} <span class="required">*</span></ion-label>
-      <ion-input type="number" [(ngModel)]="redpack.money" (input)="inputChanged();" placeholder="0.00"></ion-input>
+      
+      <ion-input type="number" 
+        [(ngModel)]="redpack.money" (input)="inputChanged();" placeholder="0.00"></ion-input>
       <ion-note item-right>元</ion-note>
     </ion-item>
   </ion-card>
@@ -31,7 +33,8 @@
   <ion-card>
     <ion-item>
       <ion-label fixed>红包个数 <span class="required">*</span></ion-label>
-      <ion-input type="number" [(ngModel)]="redpack.quantity" (input)="inputChanged();" placeholder="填写个数"></ion-input>
+      <ion-input type="number"
+      [(ngModel)]="redpack.quantity" (input)="inputChanged();" placeholder="填写个数"></ion-input>
       <ion-note item-right>个</ion-note>
     </ion-item>
   </ion-card>
