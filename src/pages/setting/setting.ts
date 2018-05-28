@@ -17,6 +17,9 @@ import { LoginPage } from '../../pages/login/login';
 })
 export class SettingPage {
 
+  user: any = null;
+  error: any = null;
+
   constructor(public navCtrl: NavController, 
     private users: Users,
     private app: App,
@@ -24,7 +27,8 @@ export class SettingPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad SettingPage');
+    // console.log('ionViewDidLoad SettingPage');
+    this.loadUserData();
   }
 
   logout() {
@@ -36,6 +40,24 @@ export class SettingPage {
       
     })
     .catch(errror => {});
+  }
+
+  loadUserData() {
+    this.users.GetUserProfile()
+      .then(res => {
+        this.user = res['data'];
+      })
+      .catch(error => {
+        this.error = error;
+      });
+  }
+
+  charge() {
+
+  }
+
+  newVIP() {
+    
   }
 
 }

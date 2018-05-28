@@ -13,32 +13,28 @@
 </ion-header>
 
 <ion-content>
-  <div class="user-caption">
+  <div class="user-caption" *ngIf="!!user">
     <button ion-item>
         <ion-avatar item-left>
-        <img src="assets/imgs/default_avatar.png" />
+        <img [src]="user.avatar || 'assets/imgs/default_avatar.png'" />
         </ion-avatar>
-      <h2>wmarshx</h2>
-      <p>普通账号</p>
+      <h2>{{user.nickname}}</h2>
+      <p>{{user.vip_status}}</p>
     </button>
     <ion-grid>
       <ion-row>
-        <ion-col col-4>
+        <ion-col col-8>
           <div class="balance cell-box">
-            <h3>¥ 0.00</h3>
+            <h3>¥ {{user.balance}}</h3>
             <p>余额</p>
+            <p class="vip">会员特权 <ion-icon name="ios-help-outline"></ion-icon></p>
           </div>
         </ion-col>
         <ion-col col-4>
-          <div class="balance cell-box">
-            <h3>0</h3>
-            <p>已发红包</p>
-          </div>
-        </ion-col>
-        <ion-col col-4>
-          <div class="balance cell-box">
-            <h3>5</h3>
-            <p>已抢红包</p>
+          <div class="operations cell-box">
+            <button class="charge-button" ion-button (click)="charge();" small>&emsp;充值&emsp;</button>
+            <button class="vip-button" ion-button (click)="newVIP();" small color="dark" [disabled]="true">成为VIP</button>
+            
           </div>
         </ion-col>
       </ion-row>
@@ -54,13 +50,22 @@
     <!-- 交易明细 -->
     <button ion-item>
       <ion-icon name="icon_trade" class="trade" item-left></ion-icon>
-      交易明细
+      消费红包抵扣历史
     </button>
+  </ion-list>
+  <ion-list></ion-list>
+    <ion-list>
     <!-- 常见问题 -->
     <button ion-item>
       <ion-icon name="icon_faq" class="faq" item-left></ion-icon>
       常见问题
     </button>
+    <!-- 用户协议 -->
+    <button ion-item>
+      <ion-icon name="ios-paper-outline" class="agreement" item-left></ion-icon>
+      用户协议
+    </button>
+
     <!-- 关于 -->
     <button ion-item>
       <ion-icon name="icon_about" class="about" item-left></ion-icon>

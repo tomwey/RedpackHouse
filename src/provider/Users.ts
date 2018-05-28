@@ -40,6 +40,22 @@ export class Users {
         return this.api.GET('u/auth', { url: url });
     }
 
+    GetUserProfile() {
+        return new Promise((resolve, reject) => {
+            this.token().then(token => {
+                this.api.GET('user/me', { token: token })
+                    .then(res => {
+                        resolve(res);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    })
+            })
+            .catch(error => {});
+            // 
+        });
+    }
+
     logout(): Promise<any> {
         return this.storage.remove('token');
     }

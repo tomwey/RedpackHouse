@@ -38,6 +38,26 @@ page-setting {
         }
     }
 
+    .balance {
+        text-align: left;
+        .vip {
+            margin-top: 10px;
+            color: color($colors, primary);
+        }
+    }
+
+    .operations {
+        text-align: right;
+
+        .charge-button {
+            margin-top: 10px;
+        }
+
+        .vip-button {
+            margin-top: 10px;
+        }
+    }
+
     .wallet {
         // font-size: 18px;
         color: color($colors, primary);
@@ -52,6 +72,10 @@ page-setting {
     .faq {
         // font-size: 18px !important;
         color: #4990E2;
+    }
+
+    .agreement {
+        color: #8B572A;
     }
 
     .about {
