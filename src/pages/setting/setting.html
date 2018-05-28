@@ -14,7 +14,7 @@
 
 <ion-content>
   <div class="user-caption" *ngIf="!!user">
-    <button ion-item>
+    <button ion-item (click)="gotoProfile();">
         <ion-avatar item-left>
         <img [src]="user.avatar || 'assets/imgs/default_avatar.png'" />
         </ion-avatar>
@@ -27,13 +27,13 @@
           <div class="balance cell-box">
             <h3 class="money">¥ {{user.balance}}</h3>
             <p>余额</p>
-            <p class="vip">会员特权 <ion-icon name="ios-help-outline"></ion-icon></p>
+            <p class="vip" (tap)="vipHelp();">会员特权 <ion-icon name="ios-help-outline"></ion-icon></p>
           </div>
         </ion-col>
         <ion-col col-4>
           <div class="operations cell-box">
             <button class="charge-button" ion-button (click)="charge();" small>&emsp;充值&emsp;</button>
-            <button class="vip-button" ion-button (click)="newVIP();" small color="dark" [disabled]="true">成为VIP</button>
+            <button class="vip-button" ion-button (click)="newVIP();" small color="dark">成为VIP</button>
             
           </div>
         </ion-col>

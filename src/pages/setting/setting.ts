@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { /*IonicPage,*/ NavController, NavParams, App } from 'ionic-angular';
+import { /*IonicPage,*/ NavController, NavParams, App, AlertController } from 'ionic-angular';
 import { Users } from '../../provider/Users';
 import { LoginPage } from '../../pages/login/login';
 
@@ -23,6 +23,7 @@ export class SettingPage {
   constructor(public navCtrl: NavController, 
     private users: Users,
     private app: App,
+    private alertCtrl: AlertController,
     public navParams: NavParams) {
   }
 
@@ -52,11 +53,31 @@ export class SettingPage {
       });
   }
 
+  gotoProfile() {
+    this.app.getRootNavs()[0].push('UserProfilePage', this.user);
+  }
+
   charge() {
 
   }
 
   newVIP() {
+    this.alertCtrl.create({
+      title: '即将上线',
+      message: '',
+      buttons: [
+        {
+          text: '确定',
+          role: '',
+          handler: () => {
+            // console.log('Cancel clicked');
+          }
+        }
+      ]
+    }).present();
+  }
+
+  vipHelp() {
     
   }
 
