@@ -66,7 +66,7 @@ export class SettingPage {
   }
 
   gotoPayMoney() {
-
+    this.app.getRootNavs()[0].push('RedpackConsumePage');
   }
 
   newVIP() {

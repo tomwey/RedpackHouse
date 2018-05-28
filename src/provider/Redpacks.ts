@@ -200,4 +200,20 @@ export class Redpacks {
             })
         });
     }
+
+    GetRedpackConsumes(action) {
+        return new Promise((resolve, reject) => {
+            this.users.token().then(token => {
+                this.api.GET(`user/${action}/hb_consumes`, {
+                    token: token
+                })
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    });
+            })
+        }); 
+    }
 }
