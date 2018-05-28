@@ -61,6 +61,14 @@ export class SettingPage {
 
   }
 
+  gotoWallet() {
+
+  }
+
+  gotoPayMoney() {
+
+  }
+
   newVIP() {
     this.alertCtrl.create({
       title: '即将上线',
@@ -77,8 +85,11 @@ export class SettingPage {
     }).present();
   }
 
-  vipHelp() {
-    
+  openPage(title, slug) {
+    this.app.getRootNavs()[0].push('BrowserPage', {
+      title: title,
+      slug: slug
+    });
   }
 
 }
