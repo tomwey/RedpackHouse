@@ -146,4 +146,22 @@ export class Redpacks {
             })
         });
     }
+
+    GetRedpackResults(id) {
+        return new Promise((resolve, reject) => {
+            this.users.token().then(token => {
+                this.api.GET(`redpack/results`, 
+            {
+                token: token,
+                id: id
+            })
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    });
+            })
+        });
+    }
 }

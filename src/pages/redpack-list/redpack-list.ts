@@ -66,9 +66,21 @@ export class RedpackListPage {
       });
   }
 
-  viewRedpack(redpack) {
+  viewRedpack(item) {
     // console.log(redpack);
-    this.app.getRootNavs()[0].push('RedpackHistoryPage', redpack);
+    let data: any = { 
+      user: this.listData.user,
+      redpack: item.redpack || item,
+     };
+
+    if (this.redpack_type == 'taked') {
+      data['redpack_earn'] = {
+        money: item.money,
+        is_cash: item.redpack && item.redpack.is_cash
+      };
+    }
+
+    this.app.getRootNavs()[0].push('RedpackHistoryPage', data);
   }
 
   updateRedpack(redpack, event) {
