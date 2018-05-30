@@ -28,6 +28,7 @@ export class Redpacks {
     }
 
     OpenRedpack(id, answer) {
+        // console.log(answer);
         return new Promise((resolve, reject) => {
             this.users.token().then(token => {
                 this.api.POST('redpack/take', { token: token, id: id, sign_val: answer })
