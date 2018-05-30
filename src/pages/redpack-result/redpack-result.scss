@@ -31,11 +31,20 @@ page-redpack-result {
             font-weight: normal;
             color: white;
         }
+
+        .hb-subject {
+            text-align: center;
+            font-size: 16px;
+            margin: 0;
+            padding: 0;
+            padding: 20px;
+            padding-bottom: 0;
+            color: white;
+        }
     }
 
-    .result {
+    .hb-result {
         margin-top: 30px;
-        // padding: 20px;
         .summary {
             font-size: 14px;
             color: #666;
@@ -44,13 +53,29 @@ page-redpack-result {
                 color: color($colors, primary);
             }
         }
+
+        .money {
+            font-size: 28px;
+            font-family: 'PingFang SC';
+            color: color($colors, primary);
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            margin-top: 20px;
+            .unit {
+                font-size: 12px;
+                color: #666;
+            }
+        }
+
         .message {
             padding: 20px;
-            margin-bottom: 60px;
+            // margin-bottom: 30px;
             color: color($colors, primary);
             font-size: 18px;
             text-align: center;
             font-family: 'PingFang SC';
+            text-align: center;
             .unit {
                 font-size: 12px;
                 color: #666;

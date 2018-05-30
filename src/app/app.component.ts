@@ -32,8 +32,8 @@ export class MyApp {
       splashScreen.hide();
 
       let rid = Utils.getQueryString('rid');
-      let rrid = Utils.getQueryString('rrid');
-      let uid = Utils.getQueryString('rrid');
+      let rrid = Utils.getQueryString('rsid');
+      let uid = Utils.getQueryString('uid');
 
       this.users.token().then(token => {
         if (!token) {
@@ -72,7 +72,6 @@ export class MyApp {
             this.appManager.shareData = { rid: rid };
             this.rootPage = RedpackDetailPage;
           }*/
-
           this.handlePageForward({ rid: rid, rrid: rrid, uid: uid });
         }
       });
@@ -80,9 +79,10 @@ export class MyApp {
   }
 
   handlePageForward(params) {
-    if (!params.rid && !params.rrid && !params.uid) { // APP入口没有带参数
-      this.rootPage = TabsPage;
-    } else {
+    // alert(params.rid);
+    // if (!params.rid && !params.rrid && !params.uid) { // APP入口没有带参数
+    //   this.rootPage = TabsPage;
+    // } else {
       // 抢红包界面
       // console.log(rid);
       this.appManager.shareData = params;
@@ -93,8 +93,10 @@ export class MyApp {
         this.rootPage = RedpackOwnerScanPage;
       } else if (params.uid) { // ?uid=4948484 用户扫商家的二维码抢红包
         this.rootPage = UserScanRedpackPage;
+      } else {
+        this.rootPage = TabsPage;
       }
       
-    }
+    // }
   }
 }

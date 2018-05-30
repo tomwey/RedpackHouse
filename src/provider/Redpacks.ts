@@ -216,4 +216,21 @@ export class Redpacks {
             })
         }); 
     }
+
+    ConfirmConsumeRedpack(rrid) {
+        return new Promise((resolve, reject) => {
+            this.users.token().then(token => {
+                this.api.POST(`redpack/consume`, {
+                    token: token,
+                    rrid: rrid,
+                })
+                    .then(data => {
+                        resolve(data);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    });
+            })
+        });
+    }
 }

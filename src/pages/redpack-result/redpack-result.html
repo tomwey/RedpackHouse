@@ -14,20 +14,21 @@
 
 <ion-content>
   <div class="result-head">
-    <img [src]="redpack.owner.avatar" class="avatar"/>
-    <h2 class="name">{{redpack.owner.nickname}}</h2>
+    <img [src]="redpack.owner && redpack.owner.avatar" class="avatar"/>
+    <h2 class="name">{{redpack.owner && redpack.owner.nickname}}</h2>
+    <p class="hb-subject" text-wrap *ngIf="!!redpack">{{redpack.subject || '恭喜发财，大吉大利'}}</p>
   </div>
-  <div class="result result-success" *ngIf="!!redpackResult">
+  
+  <div [class.hb-result]="!!redpackResult" *ngIf="!!redpackResult">
     <p class="summary">
-      恭喜您获得一个<span class="red">
-        {{redpackResult.is_cash ? '现金' : '消费'}}红包</span></p>
-    <div class="message">
-      {{redpackResult.money}} <span class="unit">元</span>
-      
-      <img [src]="redpackResult.qrcode_url" 
-        *ngIf="!!redpackResult.qrcode_url" 
+      恭喜您获得一个
+      <span class="red">{{redpackResult.is_cash ? '现金' : '消费'}}红包</span>
+    </p>
+    <p class="money">{{redpackResult.money}} <span class="unit">元</span></p>
+    <div class="message" *ngIf="!!redpackResult.qrcode_url">
+      <img [src]="redpackResult.qrcode_url"
         class="qrcode-img" />
-      <p class="help-text">商家扫二维码，确认消费抵扣</p>
+      <p class="help-text">向商家出示此二维码，扫码确认消费抵扣</p>
     </div>
     <div padding>
       <button ion-button full (click)="goHome()">
@@ -35,19 +36,18 @@
       </button>
     </div>
   </div>
-  <div classs="result result-error" *ngIf="!!redpackError">
+  <div *ngIf="redpackError" [class.hb-result]="redpackError">
     <div class="message">
       {{redpackError.code == 500 ? '服务器出错了~' : redpackError.message}}
     </div>
-    <div padding *ngIf="redpackError.code == 500">
-      <button ion-button full (click)="openRedpack()" color="secondary">
-        点击再拆一次红包
-      </button>
-    </div>
     <div padding>
-      <button ion-button full (click)="goHome()">
-        回首页
-      </button>
+        <button margin-bottom ion-button full *ngIf="redpackError.code == 500"
+         (click)="openRedpack()" color="secondary">
+          点击再拆一次红包
+        </button>
+        <button ion-button full (click)="goHome()">
+          回首页
+        </button>
     </div>
   </div>
 

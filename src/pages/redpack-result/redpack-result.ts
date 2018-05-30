@@ -42,6 +42,7 @@ export class RedpackResultPage {
       .then(data => {
         if (data) {
           this.redpackResult = data['data'];
+          this.redpackError = null;
         }
       })
       .catch(error => {
