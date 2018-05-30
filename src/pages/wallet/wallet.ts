@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
 import { Users } from '../../provider/Users';
 
 /**
@@ -19,6 +19,7 @@ export class WalletPage {
   user: any = null;
   constructor(public navCtrl: NavController, 
     private users: Users,
+    private app: App,
     public navParams: NavParams) {
   }
 
@@ -40,11 +41,11 @@ export class WalletPage {
   }
 
   gotoTradeList() {
-
+    this.app.getRootNavs()[0].push('TradeListPage');
   }
 
   gotoWithdraw(type) {
-
+    this.app.getRootNavs()[0].push('WithdrawPage', { type: type });
   }
 
 }

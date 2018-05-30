@@ -59,4 +59,21 @@ export class Users {
     logout(): Promise<any> {
         return this.storage.remove('token');
     }
+
+    GetTrades(pageNo: number, pageSize: number = 20) {
+        return new Promise((resolve, reject) => {
+            this.token().then(token => {
+                const flag = pageNo === 1;
+                this.api.GET('user/trades', { token: token, page: pageNo, size: pageSize }, '正在加载', flag)
+                    .then(res => {
+                        resolve(res);
+                    })
+                    .catch(error => {
+                        reject(error);
+                    })
+            })
+            .catch(error => {});
+            // 
+        });
+    }
 }
