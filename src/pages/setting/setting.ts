@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { /*IonicPage,*/ NavController, NavParams, App, AlertController } from 'ionic-angular';
+import { /*IonicPage,*/ NavController, NavParams, App, AlertController, Events } from 'ionic-angular';
 import { Users } from '../../provider/Users';
 import { LoginPage } from '../../pages/login/login';
 
@@ -23,11 +23,15 @@ export class SettingPage {
   constructor(public navCtrl: NavController, 
     private users: Users,
     private app: App,
+    private events: Events,
     private alertCtrl: AlertController,
     public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
+    this.events.subscribe('user:reload', () => {
+      this.loadUserData();
+    });
     // console.log('ionViewDidLoad SettingPage');
     this.loadUserData();
   }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App, Events } from 'ionic-angular';
 import { Users } from '../../provider/Users';
 
 /**
@@ -20,10 +20,14 @@ export class WalletPage {
   constructor(public navCtrl: NavController, 
     private users: Users,
     private app: App,
+    private events: Events,
     public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
+    this.events.subscribe('user:reload', () => {
+      this.loadUserProfile();
+    });
     // console.log('ionViewDidLoad WalletPage');
     setTimeout(() => {
       this.loadUserProfile();
