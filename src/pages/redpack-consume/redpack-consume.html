@@ -22,6 +22,9 @@
 <ion-content>
   <div class="consumes" *ngIf="!!consumeData">
     <h2 class="total-money">{{consumeData.total_money}} <span class="unit">元</span></h2>
+    <div class="empty-error-box" *ngIf="!!errorMsg">
+      {{errorMsg}}
+    </div>
     <ion-list>
       <ion-item *ngFor="let item of consumeData.list">
         <ion-avatar item-left>
