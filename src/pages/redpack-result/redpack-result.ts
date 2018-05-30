@@ -37,6 +37,8 @@ export class RedpackResultPage {
   }
 
   openRedpack() {
+    if (!this.redpack) return;
+    
     this.redpacks.OpenRedpack(this.redpack.id, 
       this.navParams.data.answer)
       .then(data => {

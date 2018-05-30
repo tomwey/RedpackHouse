@@ -14,8 +14,8 @@
 
 <ion-content>
   <div class="result-head">
-    <img [src]="redpack.owner && redpack.owner.avatar" class="avatar"/>
-    <h2 class="name">{{redpack.owner && redpack.owner.nickname}}</h2>
+    <img [src]="redpack && redpack.owner && redpack.owner.avatar" class="avatar"/>
+    <h2 class="name">{{redpack && redpack.owner && redpack.owner.nickname}}</h2>
     <p class="hb-subject" text-wrap *ngIf="!!redpack">{{redpack.subject || '恭喜发财，大吉大利'}}</p>
   </div>
   
@@ -28,7 +28,7 @@
     <div class="message" *ngIf="!!redpackResult.qrcode_url">
       <img [src]="redpackResult.qrcode_url"
         class="qrcode-img" />
-      <p class="help-text">向商家出示此二维码，扫码确认消费抵扣</p>
+      <p class="help-text">向商家出示此二维码，商家扫码确认消费</p>
     </div>
     <div padding>
       <button ion-button full (click)="goHome()">
