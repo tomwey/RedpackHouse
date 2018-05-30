@@ -76,9 +76,13 @@ page-redpack-list {
         .pin {
             background-color: rgb(238,186,61);
             color: white;
-            font-size: 14px;
+            font-size: 12px;
             padding:4px;
-            margin-right: 4px;
+            // margin-right: 2px;
+
+            &.red {
+                background-color: color($colors, primary);
+            }
         }
 
         .right-content, .left-content {

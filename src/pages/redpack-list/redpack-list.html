@@ -58,33 +58,32 @@
     <ion-list *ngIf="redpack_type == 'taked' && listData && listData.list">
       <button ion-item detail-none *ngFor="let item of listData.list" (click)="viewRedpack(item);">
         <div class="left-content">
-          <h2 class="name">{{item.hb_sender.nickname}}</h2>
+          <h2 class="name" text-wrap>
+            <span class="pin" *ngIf="item.redpack.is_pin">拼</span>
+            <span class="pin red" *ngIf="!item.redpack.is_cash">抵</span>
+            {{item.hb_sender.nickname}}
+          </h2>
           <p>{{item.time}}</p>
           
         </div>
         <div item-right class="right-content">
           <h2 class="money">
-              <span class="pin" *ngIf="item.redpack.is_pin">拼</span>{{item.money}} 元
+              {{item.money}} 元
           </h2>
-          <p class="use-type">  
-            {{item.redpack.is_cash ? '现金红包' : '消费红包'}}
-          </p>
         </div>
       </button>
     </ion-list>
     <ion-list *ngIf="redpack_type == 'sent' && listData && listData.list">
       <button ion-item detail-none *ngFor="let item of listData.list" (click)="viewRedpack(item);">
         <div class="left-content">
-          <h2 class="name">{{item.is_cash ? '现金红包' : '消费红包'}}</h2>
+          <h2 class="name" text-wrap><span class="pin" *ngIf="item.is_pin">拼</span>
+            {{item.is_cash ? '现金红包' : '消费红包'}} {{item.total_money}} 元</h2>
           <p>{{item.time}}</p>
         </div>
         <div item-right class="right-content">
-          <h2 class="money">
-              <span class="pin" *ngIf="item.is_pin">拼</span>{{item.total_money}} 元
-          </h2>
           <button ion-button (click)="openOrClose(item, $event);">
             {{item.in_use ? '关闭' : '打开'}}
-          </button>
+          </button><br>
           <button ion-button color="dark" (click)="updateRedpack(item, $event);">
             修改
           </button>
