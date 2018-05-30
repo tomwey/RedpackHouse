@@ -62,7 +62,7 @@ export class SettingPage {
   }
 
   gotoWallet() {
-
+    this.app.getRootNavs()[0].push('WalletPage');
   }
 
   gotoPayMoney() {

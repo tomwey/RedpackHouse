@@ -25,6 +25,7 @@ import { Users } from '../provider/Users';
 import { ApiService } from '../provider/api-service';
 import { AppManager } from '../provider/AppManager';
 import { Redpacks } from '../provider/Redpacks';
+import { Pays } from '../provider/Pays';
 // import { APIs } from '../provider/APIs';
 // import { ApiService } from '../provider/api-service';
 
@@ -73,6 +74,7 @@ import { Redpacks } from '../provider/Redpacks';
     ApiService,
     AppManager,
     Redpacks,
+    Pays,
   ]
 })
 export class AppModule {}
