@@ -42,7 +42,7 @@ page-setting {
     .balance {
         text-align: left;
         .vip {
-            margin-top: 10px;
+            margin-top: 15px;
             color: color($colors, primary);
         }
         .money {
@@ -56,11 +56,17 @@ page-setting {
         text-align: right;
 
         .charge-button {
-            margin-top: 5px;
+            // margin-top: 5px;
+            margin-top: 0;
+            width: 70px;
+            font-size: 13px;
+            // padding: 5px 0;
         }
 
         .vip-button {
-            margin-top: 10px;
+            // margin-top: 10px;
+            width: 70px;
+            font-size: 13px;
         }
     }
 
@@ -88,6 +94,28 @@ page-setting {
     .about {
         // font-size: 18px;
         color: rgb(120,120,120);
+    }
+
+    .custom-item {
+        margin: 0;
+        padding: 0;
+        padding-left: 30px;
+
+        .oper-btn {
+            width: 70px;
+            font-size: 14px;
+        }
+
+        .money {
+            font-size: 2rem;
+            color: #333;
+            font-family: 'PingFang SC';
+            font-weight: normal;
+        }
+    }
+
+    .item-ios.item-block .item-inner {
+        border-bottom: 0;
     }
     
 }

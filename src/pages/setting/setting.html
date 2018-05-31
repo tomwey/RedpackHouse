@@ -21,6 +21,7 @@
       <h2>{{user.nickname}}</h2>
       <p>{{user.vip_status}}</p>
     </button>
+   
     <ion-grid>
       <ion-row>
         <ion-col col-8>
@@ -32,13 +33,14 @@
         </ion-col>
         <ion-col col-4>
           <div class="operations cell-box">
-            <button class="charge-button" ion-button (click)="charge();" small>&emsp;充值&emsp;</button>
-            <button class="vip-button" ion-button (click)="newVIP();" small color="dark">成为VIP</button>
+            <button class="charge-button" ion-button (click)="charge();">充值</button><br/>
+            <button class="vip-button" ion-button (click)="newVIP();" color="dark">成为VIP</button>
             
           </div>
         </ion-col>
       </ion-row>
     </ion-grid>
+
   </div>
   <ion-list></ion-list>
   <ion-list>
