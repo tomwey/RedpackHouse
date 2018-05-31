@@ -13,6 +13,7 @@ import { AppManager } from '../provider/AppManager';
 
 import { RedpackOwnerScanPage } from '../pages/redpack-owner-scan/redpack-owner-scan';
 import { UserScanRedpackPage } from '../pages/user-scan-redpack/user-scan-redpack';
+import { Wechat } from '../provider/Wechat';
 
 @Component({
   templateUrl: 'app.html'
@@ -24,6 +25,7 @@ export class MyApp {
     private users: Users, 
     private tools: Tools,
     private appManager: AppManager,
+    private wechat: Wechat,
     splashScreen: SplashScreen) {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -85,6 +87,14 @@ export class MyApp {
     // } else {
       // 抢红包界面
       // console.log(rid);
+      this.wechat.GetConfig(window.location.href)
+        .then(data => {
+
+        })
+        .catch(error => {
+
+        });
+
       this.appManager.shareData = params;
 
       if (params.rid) { // ?rid=1234 跳转到红包详情

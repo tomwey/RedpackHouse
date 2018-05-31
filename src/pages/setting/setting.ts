@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { /*IonicPage,*/ NavController, NavParams, App, AlertController, Events } from 'ionic-angular';
+import { /*IonicPage,*/ NavController, NavParams, App, AlertController, Events, ModalController } from 'ionic-angular';
 import { Users } from '../../provider/Users';
 import { LoginPage } from '../../pages/login/login';
 
@@ -24,6 +24,7 @@ export class SettingPage {
     private users: Users,
     private app: App,
     private events: Events,
+    private modalCtrl: ModalController,
     private alertCtrl: AlertController,
     public navParams: NavParams) {
   }
@@ -62,7 +63,13 @@ export class SettingPage {
   }
 
   charge() {
-
+    let modal = this.modalCtrl.create('ChargePage');
+    modal.onDidDismiss((data) => {
+      if (data) {
+        this.loadUserData();
+      };
+    })
+    modal.present();
   }
 
   gotoWallet() {

@@ -26,6 +26,7 @@ import { ApiService } from '../provider/api-service';
 import { AppManager } from '../provider/AppManager';
 import { Redpacks } from '../provider/Redpacks';
 import { Pays } from '../provider/Pays';
+import { Wechat } from '../provider/Wechat';
 // import { APIs } from '../provider/APIs';
 // import { ApiService } from '../provider/api-service';
 
@@ -75,6 +76,7 @@ import { Pays } from '../provider/Pays';
     AppManager,
     Redpacks,
     Pays,
+    Wechat,
   ]
 })
 export class AppModule {}
