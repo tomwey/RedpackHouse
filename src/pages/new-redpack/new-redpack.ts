@@ -44,6 +44,12 @@ export class NewRedpackPage {
     public navParams: NavParams) {
   }
 
+  // ngOnInit() {
+  //   if (this.platform.is('mobileweb') && this.platform.is('ios')) {
+  //     this.content.enableJsScroll()
+  //   }
+  // }
+
   ionViewDidLoad() {
     // this.fixedIOSScrollBug();
     // console.log('ionViewDidLoad NewRedpackPage');
