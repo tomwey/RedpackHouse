@@ -37,7 +37,7 @@ export class RedpackDetailPage {
   }
 
   ionViewDidLoad() {
-    this.fixedIOSScrollBug();
+    // this.fixedIOSScrollBug();
 
     this.redpacks.GetRedback(this.appManager.shareData.rid)
       .then(data => {

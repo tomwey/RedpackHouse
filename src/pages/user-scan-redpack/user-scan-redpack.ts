@@ -37,7 +37,7 @@ export class UserScanRedpackPage {
   }
 
   ionViewDidLoad() {
-    this.fixedIOSScrollBug();
+    // this.fixedIOSScrollBug();
 
     this.redpacks.ScanRedback(this.appManager.shareData.uid)
       .then(data => {

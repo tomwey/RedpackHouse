@@ -45,7 +45,7 @@ export class NewRedpackPage {
   }
 
   ionViewDidLoad() {
-    this.fixedIOSScrollBug();
+    // this.fixedIOSScrollBug();
     // console.log('ionViewDidLoad NewRedpackPage');
   }
 

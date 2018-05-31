@@ -21,6 +21,7 @@ export class RedpackListPage {
   currentYear: string = null;
 
   listData: any = null;
+  errorMsg: string = null;
 
   constructor(public navCtrl: NavController, 
     private redpacks: Redpacks,
@@ -53,16 +54,19 @@ export class RedpackListPage {
   }
 
   loadData() {
+    this.errorMsg = null;
+
     const year = this.currentYear.substr(0, this.currentYear.length - 1);
     // console.log(year);
     this.redpacks.GetMyRedpacks(this.redpack_type, year)
       .then(res => {
         if (res && res['data']) {
           this.listData = res['data'];
+          this.errorMsg = this.listData.list.length === 0 ? '暂无数据' : null;
         }
       })
       .catch(error => {
-
+        this.errorMsg = error.message || error;
       });
   }
 
