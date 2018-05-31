@@ -3,6 +3,7 @@ import { /*IonicPage, */NavController, NavParams, Content, App, Platform } from 
 import { AppManager } from '../../provider/AppManager';
 import { Redpacks } from '../../provider/Redpacks';
 import { TabsPage } from '../../pages/tabs/tabs';
+import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 
 /**
  * Generated class for the UserScanRedpackPage page.
@@ -32,12 +33,14 @@ export class UserScanRedpackPage {
     private appManager: AppManager,
     private redpacks: Redpacks,
     private app: App,
-    private platform: Platform,
+    private iosFixed: iOSFixedScrollFreeze,
+    // private platform: Platform,
   ) {
   }
 
   ionViewDidLoad() {
     // this.fixedIOSScrollBug();
+    this.iosFixed.fixedScrollFreeze(this.content);
 
     this.redpacks.ScanRedback(this.appManager.shareData.uid)
       .then(data => {
@@ -72,28 +75,4 @@ export class UserScanRedpackPage {
                                                has_sign: this.redpackData.has_sign });
     }
   }
-
-  fixedIOSScrollBug() {
-    if (this.platform.is('mobileweb') && this.platform.is('ios')) {
-
-      this.content.scrollTo(0, 1);
-
-      this.content.ionScrollEnd.subscribe(evt => {
-        const scrollElement = this.content.getScrollElement();
-        // console.log(111);
-        if ((this.content.contentHeight + 1) < scrollElement.scrollHeight) {
-
-          if (scrollElement.scrollTop === 0) {
-            // scrollElement.scrollTo(0, 1);
-            this.content.scrollTo(0,1);
-          }
-          else if ((scrollElement.scrollTop + this.content.contentHeight) === scrollElement.scrollHeight) {
-            // scrollElement.scrollTo(0, (scrollElement.scrollTop - 1));
-            this.content.scrollTo(0, (scrollElement.scrollTop - 1));
-          }
-        };
-      });
-    }
-  }
-
 }

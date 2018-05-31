@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { Redpacks } from '../../provider/Redpacks';
+import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 
 /**
  * Generated class for the RedpackConsumePage page.
@@ -21,13 +22,17 @@ export class RedpackConsumePage {
 
   errorMsg: string = null;
 
+  @ViewChild(Content) content: Content;
+
   constructor(public navCtrl: NavController,
     private redpacks: Redpacks, 
+    private iosFixed: iOSFixedScrollFreeze,
     public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad RedpackConsumePage');
+    this.iosFixed.fixedScrollFreeze(this.content);
   }
 
   ionViewWillEnter() {

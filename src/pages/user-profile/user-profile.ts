@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, ToastController, Content } from 'ionic-angular';
+import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 
 /**
  * Generated class for the UserProfilePage page.
@@ -16,13 +17,17 @@ import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angu
 export class UserProfilePage {
 
   user: any = null;
+  @ViewChild(Content) content: Content;
+
   constructor(public navCtrl: NavController, 
     private toastCtrl: ToastController,
+    private iosFixed: iOSFixedScrollFreeze,
     public navParams: NavParams) {
     this.user = this.navParams.data;
   }
 
   ionViewDidLoad() {
+    this.iosFixed.fixedScrollFreeze(this.content);
     // console.log('ionViewDidLoad UserProfilePage');
   }
 

@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
-import { /*IonicPage,*/ NavController, NavParams, App } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { /*IonicPage,*/ NavController, NavParams, App, Content } from 'ionic-angular';
 import { AppManager } from '../../provider/AppManager';
 import { Redpacks } from '../../provider/Redpacks';
 import { TabsPage } from '../../pages/tabs/tabs';
+import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 
 /**
  * Generated class for the RedpackOwnerScanPage page.
@@ -23,14 +24,19 @@ export class RedpackOwnerScanPage {
   loaded: boolean = false;
   errorMsg: string = null;
 
+  @ViewChild(Content) content: Content;
+
   constructor(public navCtrl: NavController, 
     private appManager: AppManager,
     private redpacks: Redpacks,
     private app: App,
+    private iosFixed: iOSFixedScrollFreeze,
     public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
+    this.iosFixed.fixedScrollFreeze(this.content);
+    
     // console.log('ionViewDidLoad RedpackOwnerScanPage');
     setTimeout(() => {
       this.sendConfirm();

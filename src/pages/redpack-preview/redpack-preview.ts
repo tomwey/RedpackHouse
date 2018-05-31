@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, ViewController, Content } from 'ionic-angular';
 import { Redpacks } from '../../provider/Redpacks';
+import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 
 /**
  * Generated class for the RedpackPreviewPage page.
@@ -21,14 +22,18 @@ export class RedpackPreviewPage {
 
   redpack: any = null;
 
+  @ViewChild(Content) content: Content;
+
   constructor(public navCtrl: NavController, 
     private viewCtrl: ViewController,
     private redpacks: Redpacks,
+    private iosFixed: iOSFixedScrollFreeze,
     public navParams: NavParams) {
       this.redpack = this.navParams.data;
   }
 
   ionViewDidLoad() {
+    this.iosFixed.fixedScrollFreeze(this.content);
     // console.log('ionViewDidLoad RedpackPreviewPage');
   }
 

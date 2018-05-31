@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, ViewController, Content } from 'ionic-angular';
 import { Pays } from '../../provider/Pays';
 import { Wechat } from '../../provider/Wechat';
+import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 
 /**
  * Generated class for the ChargePage page.
@@ -20,13 +21,20 @@ export class ChargePage {
   charge: any = { money: 0 };
   // customMoney: number = null;
 
+  @ViewChild(Content) content: Content;
+
   chargeList: any = [];
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               private viewController: ViewController,
               private pays: Pays,
               private wechat: Wechat,
+              private iosFixed: iOSFixedScrollFreeze,
             ) {
+  }
+
+  ionViewDidLoad() {
+    this.iosFixed.fixedScrollFreeze(this.content);
   }
 
   ionViewDidEnter() {

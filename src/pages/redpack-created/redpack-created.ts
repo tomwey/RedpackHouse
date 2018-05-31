@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ViewController, ToastController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, ViewController, ToastController, Content } from 'ionic-angular';
+import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 
 /**
  * Generated class for the RedpackCreatedPage page.
@@ -16,14 +17,19 @@ import { IonicPage, NavController, NavParams, ViewController, ToastController } 
 export class RedpackCreatedPage {
 
   redpack: any = null;
+  
+  @ViewChild(Content) content: Content;
+
   constructor(public navCtrl: NavController, 
     private viewCtrl: ViewController,
     private toastCtrl: ToastController,
+    private iosFixed: iOSFixedScrollFreeze,
     public navParams: NavParams) {
       this.redpack = this.navParams.data;
   }
 
   ionViewDidLoad() {
+    this.iosFixed.fixedScrollFreeze(this.content);
     // console.log('ionViewDidLoad RedpackCreatedPage');
   }
 

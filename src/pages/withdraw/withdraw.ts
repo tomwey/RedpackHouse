@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, Events } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Events, Content } from 'ionic-angular';
 import { Pays } from '../../provider/Pays';
 import { Tools } from '../../provider/Tools';
+import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 
 /**
  * Generated class for the WithdrawPage page.
@@ -28,11 +29,14 @@ export class WithdrawPage {
   account: any = { no: '', name: '' };
 
   withdrawData: any = null;
+ 
+  @ViewChild(Content) content: Content;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               private pays: Pays,
               private events: Events,
+              private iosFixed: iOSFixedScrollFreeze,
               private tools: Tools,
             ) {
     // this.user = this.navParams.data.user;
@@ -40,6 +44,10 @@ export class WithdrawPage {
 
     this.title = this.type === 2 ? '支付宝提现' : '微信提现';
     this.namePlaceholder = this.type === 2 ? '支付宝实名认证的姓名' : '微信绑定的银行卡真实姓名';
+  }
+
+  ionViewDidLoad() {
+    this.iosFixed.fixedScrollFreeze(this.content);
   }
 
   ionViewWillEnter(): void {

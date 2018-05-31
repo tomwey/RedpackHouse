@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { ApiService } from '../../provider/api-service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 
 /**
  * Generated class for the BrowserPage page.
@@ -20,15 +21,20 @@ export class BrowserPage {
   page: any = null;
   body: any = null;
 
+  @ViewChild(Content) content: Content;
+
   constructor(public navCtrl: NavController, 
     private api: ApiService,
     private san: DomSanitizer,
+    private iosFixed: iOSFixedScrollFreeze,
     public navParams: NavParams) {
     this.page = this.navParams.data;
   }
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad BrowserPage');
+    this.iosFixed.fixedScrollFreeze(this.content);
+
     setTimeout(() => {
       this.loadPage();
     }, 200);

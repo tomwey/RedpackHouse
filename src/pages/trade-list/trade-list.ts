@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { Users } from '../../provider/Users';
+import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 
 /**
  * Generated class for the TradeListPage page.
@@ -24,9 +25,12 @@ export class TradeListPage {
 
   needsShowEmptyResult: boolean = false;
 
+  @ViewChild(Content) content: Content;
+
   constructor(public navCtrl: NavController, 
               public navParams: NavParams,
               private users: Users,
+              private iosFixed: iOSFixedScrollFreeze,
               ) {
   
     // this.loadTrades();
@@ -69,6 +73,7 @@ export class TradeListPage {
   }
 
   ionViewDidLoad() {
+    this.iosFixed.fixedScrollFreeze(this.content);
     // console.log('ionViewDidLoad TradeList');
   }
 
