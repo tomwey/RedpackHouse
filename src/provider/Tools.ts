@@ -45,7 +45,7 @@ export class Tools {
         if (!this.loading) {
             let loading = this.loadingCtrl.create({
                 content: content,
-                spinner: 'crescent',
+                // spinner: 'crescent',
             });
             loading.present();
             this.loading = loading;
