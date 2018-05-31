@@ -11,4 +11,9 @@ page-redpack-edit {
         color: color($colors, primary);
         text-align: center;
     }
+
+        // 去除阴影效果
+        .card-ios {
+            box-shadow: none;
+        }
 }

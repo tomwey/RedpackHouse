@@ -45,6 +45,25 @@ export class SettingPage {
   }
 
   logout() {
+    this.alertCtrl.create({
+      title: '退出登录',
+      subTitle: '您确定要退出登录吗？',
+      buttons: [
+        {
+          text: '取消',
+          role: 'Cancel',
+        },
+        {
+          text: '确定',
+          handler: () => {
+            this.doLogout();
+          }
+        }
+      ]
+    }).present();
+  }
+
+  doLogout() {
     this.users.logout().then(() => {
       // this.events.publish('user:logout');
       setTimeout(() => {
