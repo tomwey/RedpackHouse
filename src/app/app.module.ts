@@ -27,6 +27,7 @@ import { AppManager } from '../provider/AppManager';
 import { Redpacks } from '../provider/Redpacks';
 import { Pays } from '../provider/Pays';
 import { Wechat } from '../provider/Wechat';
+import { iOSFixedScrollFreeze } from '../provider/iOSFixedScrollFreeze';
 // import { APIs } from '../provider/APIs';
 // import { ApiService } from '../provider/api-service';
 
@@ -77,6 +78,7 @@ import { Wechat } from '../provider/Wechat';
     Redpacks,
     Pays,
     Wechat,
+    iOSFixedScrollFreeze,
   ]
 })
 export class AppModule {}

@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Platform, Content } from 'ionic-angular';
 import { Redpacks } from '../../provider/Redpacks';
 
 /**
@@ -24,14 +24,18 @@ export class RedpackThemePage {
 
   redpack: any = null;
 
+  @ViewChild(Content) content: Content;
+
   constructor(public navCtrl: NavController, 
     private redpacks: Redpacks,
+    private platform: Platform,
     public navParams: NavParams) {
       this.redpack = this.navParams.data;
   }
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad RedpackThemePage');
+    
     setTimeout(() => {
       this.loadCatalogs();
     }, 200);

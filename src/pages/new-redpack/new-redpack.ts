@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import { /*IonicPage, */NavController, NavParams, App, Platform, Content, ModalController } from 'ionic-angular';
+import { /*IonicPage, */NavController, NavParams, App, Content, ModalController } from 'ionic-angular';
 import { Redpacks } from '../../provider/Redpacks';
+import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 
 /**
  * Generated class for the NewRedpackPage page.
@@ -31,8 +32,8 @@ export class NewRedpackPage {
     is_cash_hb: true,
   };
 
-  moneyRegex = /^[1-9]\d*$/;
-  quantityRegex = /^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$/;
+  // moneyRegex = /^[1-9]\d*$/;
+  // quantityRegex = /^[1-9]\d*\.\d*|0\.\d*[1-9]\d*$/;
 
   @ViewChild(Content) content: Content;
 
@@ -40,7 +41,7 @@ export class NewRedpackPage {
     private app: App,
     private modalCtrl: ModalController,
     private redpacks: Redpacks,
-    private platform: Platform,
+    private iosFixed: iOSFixedScrollFreeze,
     public navParams: NavParams) {
   }
 
@@ -53,6 +54,7 @@ export class NewRedpackPage {
   ionViewDidLoad() {
     // this.fixedIOSScrollBug();
     // console.log('ionViewDidLoad NewRedpackPage');
+    this.iosFixed.fixedScrollFreeze(this.content);
   }
 
   toggleUseType() {
@@ -154,29 +156,6 @@ export class NewRedpackPage {
       sign: '',
       is_cash_hb: true,
     };
-  }
-
-  fixedIOSScrollBug() {
-    if (this.platform.is('mobileweb') && this.platform.is('ios')) {
-
-      this.content.scrollTo(0, 1);
-
-      this.content.ionScrollEnd.subscribe(evt => {
-        const scrollElement = this.content.getScrollElement();
-        // console.log(111);
-        if ((this.content.contentHeight + 1) < scrollElement.scrollHeight) {
-
-          if (scrollElement.scrollTop === 0) {
-            // scrollElement.scrollTo(0, 1);
-            this.content.scrollTo(0,1);
-          }
-          else if ((scrollElement.scrollTop + this.content.contentHeight) === scrollElement.scrollHeight) {
-            // scrollElement.scrollTo(0, (scrollElement.scrollTop - 1));
-            this.content.scrollTo(0, (scrollElement.scrollTop - 1));
-          }
-        };
-      });
-    }
   }
 
 }

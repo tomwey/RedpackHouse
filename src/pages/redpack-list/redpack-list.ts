@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { /*IonicPage, */NavController, NavParams, App, ModalController, AlertController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { /*IonicPage, */NavController, NavParams, App, ModalController, AlertController, Content } from 'ionic-angular';
 import { Redpacks } from '../../provider/Redpacks';
+import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 
 /**
  * Generated class for the RedpackListPage page.
@@ -23,9 +24,12 @@ export class RedpackListPage {
   listData: any = null;
   errorMsg: string = null;
 
+  @ViewChild(Content) content: Content;
+
   constructor(public navCtrl: NavController, 
     private redpacks: Redpacks,
     private app: App,
+    private iosFixed: iOSFixedScrollFreeze,
     private modalCtrl: ModalController,
     private alertCtrl: AlertController,
     public navParams: NavParams) {
@@ -43,6 +47,8 @@ export class RedpackListPage {
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad RedpackListPage');
+    this.iosFixed.fixedScrollFreeze(this.content);
+
     setTimeout(() => {
       this.loadData();
     }, 50);

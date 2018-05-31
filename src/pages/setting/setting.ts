@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { /*IonicPage,*/ NavController, NavParams, App, AlertController, Events, ModalController } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { /*IonicPage,*/ NavController, NavParams, App, AlertController, Events, ModalController, Platform, Content } from 'ionic-angular';
 import { Users } from '../../provider/Users';
 import { LoginPage } from '../../pages/login/login';
+import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 
 /**
  * Generated class for the SettingPage page.
@@ -20,16 +21,22 @@ export class SettingPage {
   user: any = null;
   error: any = null;
 
+  @ViewChild(Content) content: Content;
+
   constructor(public navCtrl: NavController, 
     private users: Users,
     private app: App,
     private events: Events,
+    private iosFixed: iOSFixedScrollFreeze,
     private modalCtrl: ModalController,
     private alertCtrl: AlertController,
     public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
+
+    this.iosFixed.fixedScrollFreeze(this.content);
+
     this.events.subscribe('user:reload', () => {
       this.loadUserData();
     });
