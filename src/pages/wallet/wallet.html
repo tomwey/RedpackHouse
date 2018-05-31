@@ -25,7 +25,7 @@
         <button ion-item (click)="gotoWithdraw(2)">
           支付宝提现
         </button>
-        <button ion-item (click)="gotoWithdraw(1)">
+        <button ion-item (click)="gotoWithdraw(1)" *ngIf="user && user.wx_bind">
           微信提现
         </button>
       </ion-list>
