@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { Redpacks } from '../../provider/Redpacks';
+import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 
 /**
  * Generated class for the RedpackHistoryPage page.
@@ -23,18 +24,23 @@ export class RedpackHistoryPage {
 
   dataError: string = null;
 
+  @ViewChild(Content) content: Content;
+
   constructor(public navCtrl: NavController, 
     private redpacks: Redpacks,
+    private iosFixed: iOSFixedScrollFreeze,
     public navParams: NavParams) {
     this.user = this.navParams.data.user;
     this.redpack_earn = this.navParams.data.redpack_earn;
     this.redpack = this.navParams.data.redpack;
 
-    console.log(this.navParams.data);
+    // console.log(this.navParams.data);
   }
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad RedpackHistoryPage');
+    this.iosFixed.fixedScrollFreeze(this.content);
+    
     setTimeout(() => {
       this.loadData();
     }, 100);

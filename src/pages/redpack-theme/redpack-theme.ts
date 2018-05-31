@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Platform, Content } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { Redpacks } from '../../provider/Redpacks';
+import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 
 /**
  * Generated class for the RedpackThemePage page.
@@ -28,13 +29,16 @@ export class RedpackThemePage {
 
   constructor(public navCtrl: NavController, 
     private redpacks: Redpacks,
-    private platform: Platform,
+    // private platform: Platform,
+    private iosFixed: iOSFixedScrollFreeze,
     public navParams: NavParams) {
       this.redpack = this.navParams.data;
   }
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad RedpackThemePage');
+
+    this.iosFixed.fixedScrollFreeze(this.content);
     
     setTimeout(() => {
       this.loadCatalogs();

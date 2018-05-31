@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Component, ViewChild } from '@angular/core';
+import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
 import { Redpacks } from '../../provider/Redpacks';
 import { AudioProvider } from 'ionic-audio';
+import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 
 /**
  * Generated class for the RedpackAudioPage page.
@@ -28,15 +29,20 @@ export class RedpackAudioPage {
   myTracks: any[];
   allTracks: any[];
 
+  @ViewChild(Content) content: Content;
+  
   constructor(public navCtrl: NavController, 
     private redpacks: Redpacks,
     private _audioProvider: AudioProvider,
+    private iosFixed: iOSFixedScrollFreeze,
     public navParams: NavParams) {
       this.redpack = this.navParams.data;
   }
 
   ionViewDidLoad() {
     // console.log('ionViewDidLoad RedpackThemePage');
+    this.iosFixed.fixedScrollFreeze(this.content);
+
     setTimeout(() => {
       this.loadCatalogs();
     }, 200);

@@ -24,6 +24,11 @@ export class RedpackListPage {
   listData: any = null;
   errorMsg: string = null;
 
+  selectOptions: any = {
+    title: '选择年份',
+    // subTitle: 'Select your toppings',
+  };
+
   @ViewChild(Content) content: Content;
 
   constructor(public navCtrl: NavController, 
