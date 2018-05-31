@@ -63,26 +63,33 @@ export class ChargePage {
   }
 
   doCharge(): void {
-    console.log(this.charge.money);
+    // console.log(this.charge.money);
 
     this.pays.ApplyCharge(this.charge.money, 1)
       .then(res => {
         let data = res['data'];
         if (data) {
-          this.wechat.pay(data)
-            .then(res => {
-              // this.close();
-              this.viewController.dismiss(1)
-              .then(data => {
-                // console.log(data);
+          if (data['pay_url']) {
+            // # H5微信支付
+            window.location.href = data['pay_url'];
+          } else {
+            // 微信公众号支付，在微信客户端调用
+            this.wechat.pay(data)
+              .then(res => {
+                // this.close();
+                this.viewController.dismiss(1)
+                .then(data => {
+                  // console.log(data);
+                })
+                .catch(error=>{
+                  // console.log(error);
+                })
               })
-              .catch(error=>{
-                // console.log(error);
-              })
-            })
-            .catch(error => {
+              .catch(error => {
 
-            });
+              });
+          }
+          
         }
       })
       .catch(error => {
