@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { /*IonicPage, */NavController, NavParams, Content, App, Platform } from 'ionic-angular';
+import { /*IonicPage, */NavController, NavParams, Content, App } from 'ionic-angular';
 import { AppManager } from '../../provider/AppManager';
 import { Redpacks } from '../../provider/Redpacks';
 import { TabsPage } from '../../pages/tabs/tabs';
