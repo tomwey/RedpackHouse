@@ -61,6 +61,11 @@
     </ion-row>
   </div>
   <div [hidden]="theme_type != 'custom'" class="theme-custom">
-    即将上线...
+    <!-- 即将上线... -->
+    <button ion-button (click)="selectImage();">
+      选择照片
+    </button>
+    <input type="file" (change)="selectedFiles($event)" 
+      style="display: none" #fileInput >
   </div>
 </ion-content>

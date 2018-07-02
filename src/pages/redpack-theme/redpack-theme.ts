@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { IonicPage, NavController, NavParams, Content } from 'ionic-angular';
+import { Component, ViewChild, Renderer, ElementRef } from '@angular/core';
+import { IonicPage, NavController, NavParams, Content, AlertController } from 'ionic-angular';
 import { Redpacks } from '../../provider/Redpacks';
 import { iOSFixedScrollFreeze } from '../../provider/iOSFixedScrollFreeze';
 
@@ -27,9 +27,13 @@ export class RedpackThemePage {
 
   @ViewChild(Content) content: Content;
 
+  @ViewChild('fileInput') nativeFileInputBtn: ElementRef;
+
   constructor(public navCtrl: NavController, 
     private redpacks: Redpacks,
     // private platform: Platform,
+    private renderer: Renderer, 
+    private alertCtrl: AlertController,
     private iosFixed: iOSFixedScrollFreeze,
     public navParams: NavParams) {
       this.redpack = this.navParams.data;
@@ -73,21 +77,23 @@ export class RedpackThemePage {
     if (this.selectedCatalogIndex >= this.catalogs.length) {
       return;
     }
-
     let catalog = this.catalogs[this.selectedCatalogIndex];
+    this.loadThemes(catalog.id);
+  }
 
-    this.redpacks.GetRedpackThemes(catalog.id)
-      .then(res => {
-        if (res && res['data']) {
-          this.commonData = res['data'];
+  loadThemes(cid) {
+    this.redpacks.GetRedpackThemes(cid)
+    .then(res => {
+      if (res && res['data']) {
+        this.commonData = res['data'];
 
-          this.redpack.theme = this.redpack.theme || this.commonData[0];
-          // this.selectedItem = this.commonData[0];
-        }
-      })
-      .catch(error => {
+        this.redpack.theme = this.redpack.theme || this.commonData[0];
+        // this.selectedItem = this.commonData[0];
+      }
+    })
+    .catch(error => {
 
-      });
+    });
   }
 
   selectCatalog(index) {
@@ -96,7 +102,47 @@ export class RedpackThemePage {
   }
 
   segmentChanged(ev) {
+    if (this.theme_type === 'custom') {
+      this.loadMyThemes();
+    } 
+  }
 
+  loadMyThemes() {
+
+  }
+
+  selectImage() {
+    let clickEvent: MouseEvent = new MouseEvent('click', { bubbles: true });
+    this.renderer.invokeElementMethod(
+      this.nativeFileInputBtn.nativeElement, "dispatchEvent", [clickEvent]
+    );
+  }
+
+  selectedFiles(ev) {
+    let files: FileList = this.nativeFileInputBtn.nativeElement.files;
+    // console.log(files);
+    // console.log(event);
+    if (files.length == 0) return;
+
+    let imageFile = files[0];
+
+    if (!this.isImageType(imageFile)) {
+      let alert = this.alertCtrl.create({
+        title: '图片格式错误',
+        subTitle: '不正确的图片格式，仅支持png,jpg,gif类型的图片',
+        buttons: ['确定']
+      });
+      alert.present();
+      return;
+    }
+
+    this.navCtrl.push('RedpackThemeCreatePage', { image: imageFile });
+  }
+
+  isImageType(file: File): boolean {
+    let ext: any = ['image/png', 'image/jpeg', 'image/gif'];
+    let fileType = file.type;
+    return ext.indexOf(fileType) !== -1;
   }
 
 }
